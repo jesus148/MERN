@@ -1,0 +1,60 @@
+https://www.youtube.com/watch?v=NmkY4JgS21A&t=10214s
+donde me quede : 46:35
+
+
+-----------------Instalando Modulos e Inicio Proyecto
+PS C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react> 
+- npm init -y 
+- npm i express
+- npm i nodemon -D
+      modificar package.json
+      "scripts": {
+      "dev":"nodemon src/index.js"
+       },
+- npm install mongoose 
+    > es un comando que valida antes q llegen los datos 
+     ademas es un modulo pa conectarse a mongo db y modelarlos     
+- npm i morgan        
+- npm run dev   ( ejecutando el proyecto)
+- npm i bcryptjs  
+     cifrado de contraseñas
+
+- npm i jsonwebtoken
+     para usar tokens (osea pasaes para q el usuario no se loguee otra vez)     
+
+
+----------ESTRUCTURA BACKEND-------------
+- crear carpeta src
+- crear folder > src
+     controller : funciones q se ejecutan cuando visiten una url
+     router : los servicios rest , definir endpoints
+     models : los modelos o clases guias
+     middlewares : informacion publica y info privada osea protege 
+                   osea es para autenticar
+    schemas : para validar los datos antes de que llegan al backend 
+               usaremos una biblioteca 
+    libs : codigo que vamos importar varias veces         
+
+- crear files > src
+    bd.js : conexion bd   
+    config.js : configuraciones resto files va poder importar     
+                configuraciones globales para todo el proyecto       
+    index.js : arranque de la aplicacion            
+    app.js : configurar todo el codigo de express
+
+
+
+
+
+
+ ---------------- EXTENSIONES --------------------
+ - instalar THUNDER CLIENT
+ - mongodb >
+       extension para ver la bd > 
+         addconection o mas  > connection string 
+          mongodb://localhost 
+       > ahi podra ver tus bd y tus tablas o colleciones    
+
+
+
+
