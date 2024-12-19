@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
 import { token } from 'morgan';
 
 
-
+import {createAccessToken} from '../libs/jwt.js';
 
 
 
@@ -28,10 +28,12 @@ export const register = async (req, res) => {
 
 // obteniendo la data del cliente 
 const { email , password , username} =req.body; 
-    console.log(email , password , username);   
+    
     try{
         // encriptando la contraseña
         // cifrando la contraseña en 10 caracteres
+         // encripta la contraseña con el hash 
+    // mayor sea el numero mas seguro sera pero demorara un poco
       const passwordhash= await bcryptjs.hash(password , 10);
 
     // creando un nuevo usuario 
@@ -49,31 +51,24 @@ const { email , password , username} =req.body;
     // mongodb debe estar corriendo 
       const userSaved =  await newUser.save();
 
-    console.log(userSaved);
 
-
-
-
+      
     // creacion del token 
     // de manera asincrona 
-    jwt.sign({
-        //payload : datos q se incluyen en el token
-        id:userSaved._id
-    },
-    "secret123" , //name token o Clave secreta para firmar el token
-    {
-         // tiempo expiracion
-        //  Opciones para el token
-        expiresIn : "1d"
-    },
-    // devolviendo el token
-    (err , token) => {
-      if(err) console.log(err);
-      res.json({token});
-    }       
-   );
-
-
+    // ademas se guarda el id del objeto como el payload 
+      await createAccessToken({id:userSaved._id})
+  
+  
+        // reponde el token al cliente 
+        // https://jwt.io/ : pagina para ver tus tokens 
+        // res.json({token});
+  
+        // enviado como coockie > postman > abajo > a lado de body > sale coockie
+        res.cookie('token', token);
+        // respuesta al cliente
+        // res.json({
+        //   message:"mensaje guardado satisfactoriamente"
+        // })
 
 
 
@@ -82,15 +77,18 @@ const { email , password , username} =req.body;
     // datos al front solo lo nesecario 
     res.json({
         // campo       campo = al modelo 
-        id : userSaved._id,
+        id : userSaved._id,  //el id 
         username : userSaved.username , 
         email : userSaved.email,
         createdAt : userSaved.createdAt,
         updatedAt : userSaved.updatedAt
     });
 
+    // si hay error
     }catch (err){
-        console.log(err);
+        res.status(500).json({
+          message:err.message
+        })
     }
     
 
@@ -111,4 +109,92 @@ const { email , password , username} =req.body;
 
 
 // 2----METODO LOGUEARSE
-export const loguin = (req, res) => res.send("loguin");
+export const login = async (req, res) => {
+  //    print consola el valor del request
+  
+  // obteniendo la data del cliente 
+  const { email , password } =req.body; 
+      
+      try{
+
+        // busca al usuario
+        const userFound =await User.findOne({email});
+        // si no lo encuentra
+        if(!userFound) return res.status(400).json({
+          message:"user not found"
+        })
+
+        // compara las conseñas 
+        // bcryptjs.compare :tomar la contraseña que el usuario ha ingresado (password) y compara ese valor con el hash almacenado en la base de datos
+        const isMatch = await bcryptjs.compare(password , userFound.password);
+
+        // si no es correcta la contraseña
+        if(!isMatch)return res.status(400).json({
+          message:"Incorrect password"
+        })
+
+
+
+          // encriptando la contraseña
+          // cifrando la contraseña en 10 caracteres
+           // encripta la contraseña con el hash 
+      // mayor sea el numero mas seguro sera pero demorara un poco
+        const passwordhash= await bcryptjs.hash(password , 10);
+  
+      // creando un nuevo usuario 
+      // usando la clase guia
+      // solo lo guarda en el backen no en la bd
+      const newUser = new User({
+          username,
+          email,
+          //reasigna por el hash
+          password : passwordhash,    
+      });
+  
+      // con esto lo guardara en la bd
+      // es un proceso complejo por eso eso el await
+      // mongodb debe estar corriendo 
+        const userSaved =  await newUser.save();
+  
+  
+        
+      // creacion del token 
+      // de manera asincrona 
+      // ademas se guarda el id del objeto como el payload 
+        await createAccessToken({id:userSaved._id})
+    
+    
+          // reponde el token al cliente 
+          // https://jwt.io/ : pagina para ver tus tokens 
+          // res.json({token});
+    
+          // enviado como coockie > postman > abajo > a lado de body > sale coockie
+          res.cookie('token', token);
+          // respuesta al cliente
+          // res.json({
+          //   message:"mensaje guardado satisfactoriamente"
+          // })
+  
+  
+  
+      // envia al cliente o al front
+      // campos = de la bd y el modelo 
+      // datos al front solo lo nesecario 
+      res.json({
+          // campo       campo = al modelo 
+          id : userSaved._id,  //el id 
+          username : userSaved.username , 
+          email : userSaved.email,
+          createdAt : userSaved.createdAt,
+          updatedAt : userSaved.updatedAt
+      });
+  
+      // si hay error
+      }catch (err){
+          res.status(500).json({
+            message:err.message
+          })
+      }
+      
+  
+  };

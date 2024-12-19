@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 
 
 // con esto validamos
+// con esto se crea la instancia
 // cuando guardes en la bd debe tener esta estructura dice mongoose
 // osea esto es para decir q va a guardar 
 // http://localhost:3000/api/register > probar el rest  en postman

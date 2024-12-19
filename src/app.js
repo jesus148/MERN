@@ -6,6 +6,8 @@ import morgan from 'morgan';
 // importando router
 import authRoutes from './routes/auth.routes.js';
 
+
+// aplicacion 
 const app = express();
 
 
