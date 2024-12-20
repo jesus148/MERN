@@ -53,8 +53,13 @@ PS C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react>
 
 
  ---------------- EXTENSIONES --------------------
- - instalar THUNDER CLIENT
+- instalar THUNDER CLIENT
 
+- npm i cookie-parser   : para leer las coockies
+
+  coockie : Una cookie es un archivo de texto que se guarda en el navegador de un dispositivo cuando se visita un sitio web. Su función es permitir que el sitio recuerde información sobre la visita, lo que hace que sea más fácil volver a visitarlo. 
+Las cookies pueden almacenar información como el idioma preferido o la ubicación del usuario. También pueden contener datos personales de identificación. 
+Las cookies son útiles para los usuarios, pero también para los desarrolladores web. Los sitios web pueden personalizar los contenidos y ahorrar dinero en mantenimiento y almacenamiento de servidores. 
 
 
 
@@ -71,5 +76,6 @@ PS C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react>
 
 --- video de guia 
  https://www.youtube.com/watch?v=eKXIxSZrJfw
+
 
 

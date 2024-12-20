@@ -5,6 +5,7 @@ import morgan from 'morgan';
 
 // importando router
 import authRoutes from './routes/auth.routes.js';
+import cookieParser from 'cookie-parser';
 
 
 // aplicacion 
@@ -18,6 +19,9 @@ const app = express();
 
     // atrapa la data del cliente y convierte a json
     app.use(express.json());
+
+    // para leer las coockies
+    app.use(cookieParser());
 
 
 
