@@ -10,6 +10,10 @@ import { login , register , logout , profile} from '../controller/auth.controlle
 import { authRequired } from "../middlewares/ValidateToken.js";
 
 
+// ROUTER PARA USUARIO
+
+
+
 const router = Router();
 
 // http://localhost:3000/api/register   ---post
@@ -41,7 +45,7 @@ router.post("/logout", logout);
 
 
 // http://localhost:3000/api/profile   ---post
-router.get("/profile", authRequired , profile)
+router.get("/profile", authRequired , profile);
 
 
 

@@ -67,6 +67,7 @@ const { email , password , username} =req.body;
         // res.coockie : La función se utiliza para establecer el nombre de la cookie en valor 
 //         res.cookie(name, value [, options])
 //  Parámetros: El parámetro de nombre contiene el nombre de la cookie y el parámetro de valor es el valor asignado al nombre de la cookie. El parámetro de opciones contiene varias propiedades como codificación, caducidad, dominio, etc.. 
+// 'token' : es la variable y , token esto es el valor
 
         res.cookie('token', token);
         // respuesta al cliente
@@ -230,7 +231,9 @@ export const login = async (req, res) => {
       });
 
 
-    res.json({
+
+      // retorna al cliente
+      res.json({
         // campo       campo = al modelo 
         id : userFound._id,  //el id 
         username : userFound.username , 

@@ -22,6 +22,7 @@ export const authRequired =(req , res , next)=>{
     // obteniendo las coockies  que se obtienen del fornt o postman 
     // osea cuando te logueas el token se guarda en las coockies
     // y lo obtenemos
+    // {token} es la variable dentro esta el token 
     const {token} = req.cookies; 
 
 
@@ -44,14 +45,16 @@ export const authRequired =(req , res , next)=>{
         //printer 
         // le agrega al request el user si todo esta ok
         // le agrega el el request que fue agregado en el midleware
+        // osea agregamos al request 
+        // en este caso se almacena el id 
+            // { id: '67673b9fcebdbd49b1e3a8a3', iat: 1734825067, exp: 1734911467 }
         req.user = user;
-
-    
         //continua
         next();    
     });
 
+    
 
     // todo ok  sigue su camino
-    next()
+    // next()
 }

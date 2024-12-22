@@ -1,11 +1,11 @@
 https://www.youtube.com/watch?v=NmkY4JgS21A&t=10214s
-donde me quede : 58:02 
+donde me quede : 1:42:50  
 
 
 -----------------Instalando Modulos e Inicio Proyecto
 PS C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react> 
 - npm init -y 
-- npm i express
+
 
 -----EJECUTAR EL PROYECTO 
     npm run dev
@@ -16,6 +16,9 @@ PS C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react>
        },
 
 
+
+
+EXTENSIONES
 - npm install mongoose 
     > es un comando que valida antes q llegen los datos 
      ademas es un modulo pa conectarse a mongo db y modelarlos     
@@ -23,10 +26,11 @@ PS C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react>
 - npm run dev   ( ejecutando el proyecto)
 - npm i bcryptjs  
      cifrado de contraseñas
-
+- npm i express
 - npm i jsonwebtoken
      para usar tokens (osea pasaes para q el usuario no se loguee otra vez)     
-
+- npm i zod
+   para las validaciones
 
 ----------ESTRUCTURA BACKEND-------------
 - crear carpeta src

@@ -6,6 +6,7 @@ import morgan from 'morgan';
 // importando router
 import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
+import taskRoutes from './routes/task.routes.js';
 
 
 // aplicacion 
@@ -29,6 +30,7 @@ const app = express();
 // router q contiene todos los endpoitns
 // le ponemos un prefijo para ubicarlo mas facil
 app.use('/api', authRoutes);
+app.use('/api', taskRoutes);
 
 
 
