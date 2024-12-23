@@ -1,0 +1,111 @@
+https://www.youtube.com/watch?v=NmkY4JgS21A
+2:17:12 
+
+PARTE DEL FRONT EXPLICACION 
+C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client
+
+1 . 
+
+PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN> npm create vite
+Need to install the following packages:
+create-vite@6.1.0
+Ok to proceed? (y)
+
+> mern_crud_react@1.0.0 npx
+> create-vite
+
+? Project name: » client
+
+? Select a framework: » - Use arrow-keys. Return to submit.
+    Vanilla
+    Vue
+>   React
+? Select a variant: » - Use arrow-keys. Return to submit.
+    TypeScript
+    TypeScript + SWC
+>   JavaScript
+
+
+
+
+
+2. 
+
+PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN> cd .\client\
+PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm install
+
+
+
+
+
+3.
+   instalacion de tailwind solo en reactjs 
+
+   https://tailwindcss.com/docs/guides/vite
+
+   ver documentacion > cada instalacion es diferente en librerias y framewroks
+
+
+comandos para instalacion : 
+  
+  > PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm install -D tailwindcss postcss autoprefixer
+
+  > PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npx tailwindcss init -p
+
+
+  > dirigete al client\tailwind.config.js 
+
+  /** @type {import('tailwindcss').Config} */
+export default {
+  content: [   ---agrega esto 
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+ > en el index.css principal poner eso
+  client\src\index.css o 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+4. 
+ comandos para ejecutar el proyecto 
+ PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm run dev
+
+
+
+
+ 5.
+   extensiones de reactjs o dependencias
+
+
+>  https://reactrouter.com/
+   es para el enrutado parecido al router de angular 
+   PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm i react-router
+
+
+> PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN> npm install react-hook-form
+ para manejar los estados en el form 
+reaccionar-hook-form está construido teniendo en cuenta las entradas no controladas e intenta proporcionarle a su formulario el mejor rendimiento y la menor cantidad de renderizaciones posibles. Además, reaccionar-hook-form se construye con React Hooks y se usa como un gancho, lo que significa que no hay ningún componente que pueda importar.
+
+
+> https://axios-http.com/docs/intro
+para manejar las peticiones rest parecido a angular como el post , delete
+basicamentes es para usar fetch pero de una mejor manera
+PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm install axios
+
+
+
+6. 
+   dentro de src folder o file q no veas debe crearse 
+    

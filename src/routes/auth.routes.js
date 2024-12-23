@@ -8,7 +8,8 @@ import { Router } from "express";
 // importamos esto para los metodos y no hacer largo el codigo de aca 
 import { login , register , logout , profile} from '../controller/auth.controller.js'
 import { authRequired } from "../middlewares/ValidateToken.js";
-
+import {validateScheme} from '../middlewares/validator.middleware.js';
+import {registrerScheme, loginScheme} from '../schemas/auth.scheme.js';
 
 // ROUTER PARA USUARIO
 
@@ -22,7 +23,8 @@ const router = Router();
 //     "password":"test10",
 //     "username":"test10"
 // }
-router.post('/register' , register);
+// validateScheme(registrerScheme) : midleware para las validaciones
+router.post('/register', validateScheme(registrerScheme) , register);
 
 
 
@@ -32,7 +34,8 @@ router.post('/register' , register);
 //     "email":"test10@test.com",
 //     "password":"test10"
 // }
-router.post('/login' , login);
+// validateScheme(loginScheme) : midleware para las validaciones
+router.post('/login', validateScheme(loginScheme) , login);
 
 
 

@@ -5,6 +5,8 @@ import { authRequired } from "../middlewares/ValidateToken.js";
 import {
     getTask , getTasks , createTask , updateTask , deleteTask
 } from '../controller/task.controller.js';
+import { validateScheme } from '../middlewares/validator.middleware.js';
+import { createTaskScheme } from '../schemas/task.chema.js';
 
 // ROUTER PARA TAREAS
 
@@ -24,8 +26,9 @@ router.get('/tasks/:id', authRequired , getTask);
 // {
 //     "title":"libro",
 //     "description":"libro1"
-// }
-router.post('/tasks', authRequired , createTask);
+// }  
+// validateScheme(createTaskScheme) : midleware para verificar lo q registraras
+router.post('/tasks', authRequired , validateScheme(createTaskScheme),createTask);
 
 
 // http://localhost:3000/api/tasks/67675b06743b70039500345d ---delete

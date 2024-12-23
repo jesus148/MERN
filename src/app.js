@@ -2,6 +2,7 @@
 // recordar al usar el import agregar el package.json
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 
 // importando router
 import authRoutes from './routes/auth.routes.js';
@@ -14,6 +15,13 @@ const app = express();
 
 
 
+
+
+    // para los nucleos
+    app.use(cors({ 
+        // puerto de tu front
+        origin:'http://localhost:5173'
+    }));
 
     // info personlizada de los rest
     app.use( morgan('dev'));

@@ -49,6 +49,8 @@ export const authRequired =(req , res , next)=>{
         // en este caso se almacena el id 
             // { id: '67673b9fcebdbd49b1e3a8a3', iat: 1734825067, exp: 1734911467 }
         req.user = user;
+
+        
         //continua
         next();    
     });
