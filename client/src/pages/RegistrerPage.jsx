@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { registrerRequest } from '../api/auth';
+import {useAuth} from '../context/AuthContext';
 
 
 // REGISTRO PARA USUARIO
@@ -9,17 +9,22 @@ const RegistrerPage = () => {
 
     // parte logica componente
     const {register , handleSubmit} = useForm();
+    const {signUp , user} = useAuth();
 
+    console.log(user);
 
     // values : le envia los valores de los atributoss
    // handleSubmit : valida las entradas antes de invocar el onsubmit
    const onSubmit = handleSubmit(async(values)=>{
         // console.log(values);
 
-        // llame al metodo registrar
-        const res = await registrerRequest(values)
-        console.log(res);
-       });
+        // // llame al metodo registrar
+        // const res = await registrerRequest(values)
+        // console.log(res);
+
+        signUp(values)
+
+    });
 
 
    

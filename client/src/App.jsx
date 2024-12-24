@@ -3,10 +3,20 @@ import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router';
 import LoginPage from './pages/LoginPage';
 import RegistrerPage from './pages/RegistrerPage';
+import { AuthhProvider } from './context/AuthContext';
+
+
+// COMPONENTE PADRE
 
 const App = () => {
+
+  // renderizado del componente
   return (
-    <BrowserRouter>
+
+    // AuthhProvider : todos los componentes dentro del AuthhProvider podra tener acceso eso y sus valores : client\src\context\AuthContext.jsx
+    <AuthhProvider>
+
+          <BrowserRouter>
       <Routes>
 
 {/* ROUTER PARA MOSTRAR COMPONENTES */}
@@ -24,6 +34,8 @@ const App = () => {
         <Route path='/profile' element={<h1>profile</h1>}></Route>
       </Routes>
     </BrowserRouter>
+
+    </AuthhProvider>
   );
 }
 
