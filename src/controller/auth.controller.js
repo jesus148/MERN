@@ -30,6 +30,15 @@ export const register = async (req, res) => {
 const { email , password , username} =req.body; 
     
     try{
+
+
+      // verificando si existe por email
+      const userFound = await User.findOne({email});
+      if(userFound) return res.status(400).json({
+        message:["the email already exist"]
+      })
+
+
         // encriptando la contraseña
         // cifrando la contraseña en 10 caracteres
          // encripta la contraseña con el hash 

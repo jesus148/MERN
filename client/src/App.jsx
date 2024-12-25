@@ -16,11 +16,13 @@ const App = () => {
     // AuthhProvider : todos los componentes dentro del AuthhProvider podra tener acceso eso y sus valores : client\src\context\AuthContext.jsx
     <AuthhProvider>
 
+     {/* administrando los routes */}
           <BrowserRouter>
       <Routes>
 
 {/* ROUTER PARA MOSTRAR COMPONENTES */}
 
+    {/* http://localhost:5173 */}
         <Route path='/' element={<h1>Home Page</h1>}></Route>
         
         {/* http://localhost:5173/login */}
@@ -28,6 +30,8 @@ const App = () => {
         
         {/* http://localhost:5173/registrer */}
         <Route path='/registrer' element={<RegistrerPage></RegistrerPage>}></Route>
+
+
         <Route path='/tasks' element={<h1>Task Page</h1>}></Route>
         <Route path='/add-task' element={<h1>new task</h1>}></Route>
         <Route path='/tasks/:id' element={<h1>update task</h1>}></Route>

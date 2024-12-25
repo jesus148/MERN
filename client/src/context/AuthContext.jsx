@@ -20,7 +20,7 @@ export const useAuth = () =>{
     if(!context){
         throw new Error("useAuth must be used within an authprovider")
     }
-    // retornando
+    // retornando el AuthContext que me devuelve el AuthContext.Provider y sus values
     return context
 }
 
@@ -28,6 +28,8 @@ export const useAuth = () =>{
 
 
 // Para guarda la data de los usuarios osea los datos de autenticacion
+// AuthhProvider este valor se usa en el app el que engloba
+// {children} : serian los componentes hijos q estan dentro de aqui verlo en el App.jsx
 export const AuthhProvider = ({children})=>{
 
 
@@ -36,25 +38,58 @@ export const AuthhProvider = ({children})=>{
     // user : almacena
     // setUser : modifica ese user
     // useState(null) : valor inicial en null
+    // verificar en el devtols de react los valores de este estado context
     const [user , setUser] = useState(null);
 
-    const signUp = async(user) =>{
-        // llame al metodo registrar
-        const res = await registrerRequest(user);
-        console.log(res.data);
+    // para verificar la autenticacion
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-        // metodo agrega el objeto registrado
-        setUser(res.data);
+    // guardar los errores del back
+    const [errors , setErrors] =useState(null);
+
+    // metodo para registrar
+    const signUp = async(user) =>{
+        // error
+        try {
+            // llame al metodo registrar
+            const res = await registrerRequest(user);
+            // printer el valor registrado
+            // el data es de axios que lo q devuelve le registro del back
+            console.log(res.data);
+            // metodo agrega el objeto registrado
+            setUser(res.data);
+
+            // si se ha registrado cambiar la autenticacion
+            setIsAuthenticated(true);
+            // todo ok
+        } catch (error) {
+            console.log(error);
+
+
+            // recordar axios : Es el objeto de respuesta que devuelve Axios al realizar la solicitud. Este objeto incluye varios detalles sobre la respuesta del servidor, como:
+            // status: El código de estado HTTP (por ejemplo, 200, 201, 400, etc.).
+            // headers: Los encabezados que envió el servidor.
+            // data: El cuerpo de la respuesta (generalmente en formato JSON si se trata de una API REST).
+
+
+            // error : seria el error
+            // response: el response para el cliente
+            // data : El cuerpo de la respuesta 
+            setErrors(error.response.data);
+        }
     }
+
+
+
 
 
 
 
     // renderizado componente
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar
-    // al signUp y al const [user , setUser] osea exportamos estos 2 { signUp , user}
+    // al signUp y al const [user , setUser] osea exportamos estos 2 { signUp , user} , lo compartimos como 1 obejto por eso las 2 llaves
     return (
-        <AuthContext.Provider value={{ signUp , user}}>
+        <AuthContext.Provider value={{ signUp , user , isAuthenticated}}>
             {children}
         </AuthContext.Provider>
     )
