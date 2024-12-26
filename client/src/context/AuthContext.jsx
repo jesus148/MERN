@@ -1,6 +1,6 @@
 
-import {createContext, useState , useContext} from 'react';
-import { registrerRequest } from '../api/auth';
+import {createContext, useState , useContext, useEffect} from 'react';
+import { loginrequest, registrerRequest } from '../api/auth';
 
 
 // createContext : createContext te permite crear un contexto que los componentes pueden proporcionar o leer. pareciod al use context
@@ -10,6 +10,7 @@ export const AuthContext = createContext();
 
 
 // ESTO PARA IMPORTAR EN COMPONENTES HIJOS
+
 // esto sera el uso del contexto
 // sirve para dejar de importar el AuthContext y el useContext y solo importar el useAuth
 export const useAuth = () =>{
@@ -39,6 +40,7 @@ export const AuthhProvider = ({children})=>{
     // setUser : modifica ese user
     // useState(null) : valor inicial en null
     // verificar en el devtols de react los valores de este estado context
+    // luego de renderizar el return se ejecuta el return 
     const [user , setUser] = useState(null);
 
     // para verificar la autenticacion
@@ -76,6 +78,7 @@ export const AuthhProvider = ({children})=>{
             // data: El cuerpo de la respuesta (generalmente en formato JSON si se trata de una API REST).
 
 
+            // controlando los errores con usestate
             // error : seria el error
             // response: el response para el cliente
             // data : El cuerpo de la respuesta 
@@ -86,15 +89,65 @@ export const AuthhProvider = ({children})=>{
 
 
 
+    
+    // metodo para loguearse
+    const signin = async (user) =>{
+        // ok
+        try {
+            // metood registrar
+            const res = await loginrequest(user);
+
+            // printer consola
+            console.log(res);
+        // error    
+        } catch (error) {
+
+            // error.response.data : si error es un array 
+            // recordar que del back el zod te envia como array
+            if(Array.isArray(error.response.data)){
+                setErrors(error.response.data);
+            }
+
+            // printer consola
+            // console.error(error);
+            console.log(error.response.data);
+
+             // controlando los errores con usestate
+            setErrors(error.response.data);
+        }
+    }
+
+
+
+
+
+
+    // para los efectos 
+    // [errors] : solo mapeaa eso
+    // recordar q si dejas un setTimeout suelto consume recursos cada vez q cambie el errors 
+    useEffect(()=>{
+        // si el errors tiene errores
+        if(errors.length > 0){
+            // ejecuta solo 1 vez este evento luego de 5 seg resetea todo
+          const timer =  setTimeout(() => {
+            // limpia para ya no mostrar en el componente q lo usa 
+                setErrors([])
+            }, 5000);
+            // borra el metodo configurado con el setTimeout
+            return () => clearTimeout(timer);
+        }
+    }, [errors]);
+
 
 
 
 
     // renderizado componente
+    // primero se carga tu return 
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar
     // al signUp y al const [user , setUser] osea exportamos estos 2 { signUp , user} , lo compartimos como 1 obejto por eso las 2 llaves
     return (
-        <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors}}>
+        <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors , signin }}>
             {children}
         </AuthContext.Provider>
     )

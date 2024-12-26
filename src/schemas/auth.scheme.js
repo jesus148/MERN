@@ -50,7 +50,7 @@ export const loginScheme = z.object({
     email:z.string({
         required_error:"Email is required"
     }).email({
-        message:"invalid email"
+        message:"Email is not valid"
     }),
 
 

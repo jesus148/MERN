@@ -1,8 +1,9 @@
 https://www.youtube.com/watch?v=NmkY4JgS21A
-2:43:23
+2:58:59 
 
 PARTE DEL FRONT EXPLICACION 
 C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client
+
 
 1 . 
 
@@ -80,6 +81,7 @@ export default {
 
 4. 
  comandos para ejecutar el proyecto 
+ PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN> npm install
  PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm run dev
 
 

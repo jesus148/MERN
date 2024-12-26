@@ -1,5 +1,4 @@
 
-import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router';
 import LoginPage from './pages/LoginPage';
 import RegistrerPage from './pages/RegistrerPage';

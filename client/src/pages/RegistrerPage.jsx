@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import {useAuth} from '../context/AuthContext';
 import {useNavigate} from 'react-router';
-
+import { Link } from "react-router";
 
 // REGISTRO PARA USUARIO
 const RegistrerPage = () => {
@@ -59,7 +59,7 @@ const RegistrerPage = () => {
     // parte del renderizado
     // onSubmit : cuando realizar un evento con un btn
     return (
-        <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
+        <div className='h-[calc(100vh-100px)]  flex items-center justify-center'>
             
             {/* esto aparece si hay error */}
             {
@@ -72,6 +72,8 @@ const RegistrerPage = () => {
                     </div>
                 ))
             }
+            <div className='bg-zinc-800 max-w-md w-full p-12 rounded-md'>
+            <h1 className='text-2xl font-bold'>Registrer</h1>
            <form onSubmit={onSubmit}>
 
            {/* "username" : name del input */}
@@ -94,8 +96,14 @@ const RegistrerPage = () => {
              placeholder='Password'/>
              {errors.password && (<p className='text-red-600'>password is required</p>)}
 
+
             <button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Registrer</button>
            </form>
+           <p className='flex gap-x-2 justify-between'>
+{/* Link to="/registrer" : redirecciona a otro componente recordar importar su module */}
+    Don have an account ? <Link to="/login" className='text-sky-500'>Sign Up</Link>
+</p>
+            </div>
         </div>
     );
 }
