@@ -34,10 +34,10 @@ const { email , password , username} =req.body;
 
       // verificando si existe por email
       const userFound = await User.findOne({email});
-      if(userFound) return res.status(400).json({
-        message:["the email already exist"]
-      })
-
+      if(userFound){
+        // retorna al front como objeto
+        return res.status(400).json(["The email is already in use"]);
+      }
 
         // encriptando la contraseña
         // cifrando la contraseña en 10 caracteres
@@ -99,10 +99,8 @@ const { email , password , username} =req.body;
     });
 
     // si hay error
-    }catch (err){
-        res.status(500).json({
-          message: err.message
-        })
+    }catch (error){
+      res.status(500).json({ message: error.message });
     }
     
 

@@ -13,10 +13,17 @@ export const validateScheme = (schema) => (req , res , next) =>{
     // si hay error
     } catch (error) {
 
+        // console.log(error);
         console.log(error.errors);
+        // return res
+        // .status(400)
+        // .json({ message: error.errors.map(error => error.message) });
+
+
+        // error.errors.map(error => error.message : crea un array
         return res
         .status(400)
-        .json({ message: error.errors.map(error => error.message) });
+        .json(error.errors.map(error => error.message));
     }
 }
 

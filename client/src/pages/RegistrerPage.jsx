@@ -8,12 +8,17 @@ import {useNavigate} from 'react-router';
 const RegistrerPage = () => {
 
     // parte logica componente
+
+
     // register : para registrar
     // handleSubmit : valida las entradas
     // formState:{errors} : para ver los errores
     const {register , handleSubmit, formState:{errors}} = useForm();
-    // llamamando e importando al contexto
-    const {signUp , user , isAuthenticated } = useAuth();
+
+    
+    // llamamando e importando al contexto sus valores son bidireccionales
+    // errors : RegistrerErrors  : el erros se almacena en el RegistrerErrors
+    const {signUp , user , isAuthenticated , errors : registrerErrors  } = useAuth();
 
     // redirecciona los ruoter
     const navigate = useNavigate();
@@ -53,10 +58,20 @@ const RegistrerPage = () => {
 
     // parte del renderizado
     // onSubmit : cuando realizar un evento con un btn
-
-    
     return (
         <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
+            
+            {/* esto aparece si hay error */}
+            {
+                // registrerErrors : es un array desenvolsa del back
+                // key={i} : el key para cada error es como un id
+                // error : es el cuerpo del error
+                registrerErrors.map((error, i) => ( 
+                    <div className='bg-red-500 p-2 text-white' key={i} >
+                        {error}
+                    </div>
+                ))
+            }
            <form onSubmit={onSubmit}>
 
            {/* "username" : name del input */}

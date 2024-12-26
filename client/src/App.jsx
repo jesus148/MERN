@@ -22,10 +22,12 @@ const App = () => {
 
 {/* ROUTER PARA MOSTRAR COMPONENTES */}
 
+
+    {/* x default */}
     {/* http://localhost:5173 */}
         <Route path='/' element={<h1>Home Page</h1>}></Route>
         
-        {/* http://localhost:5173/login */}
+        {/* http://localhost:5173/login*/}
         <Route path='/login' element={<LoginPage></LoginPage>}></Route>
         
         {/* http://localhost:5173/registrer */}

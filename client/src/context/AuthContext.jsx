@@ -42,10 +42,12 @@ export const AuthhProvider = ({children})=>{
     const [user , setUser] = useState(null);
 
     // para verificar la autenticacion
+    // valor inicial es false
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // guardar los errores del back
-    const [errors , setErrors] =useState(null);
+    // valor inicial un array vacio
+    const [errors , setErrors] =useState([]);
 
     // metodo para registrar
     const signUp = async(user) =>{
@@ -63,6 +65,8 @@ export const AuthhProvider = ({children})=>{
             setIsAuthenticated(true);
             // todo ok
         } catch (error) {
+
+            // muestra todo el error
             console.log(error);
 
 
@@ -75,6 +79,7 @@ export const AuthhProvider = ({children})=>{
             // error : seria el error
             // response: el response para el cliente
             // data : El cuerpo de la respuesta 
+            // para ver el cuerpo del error ver en la consola
             setErrors(error.response.data);
         }
     }
@@ -89,7 +94,7 @@ export const AuthhProvider = ({children})=>{
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar
     // al signUp y al const [user , setUser] osea exportamos estos 2 { signUp , user} , lo compartimos como 1 obejto por eso las 2 llaves
     return (
-        <AuthContext.Provider value={{ signUp , user , isAuthenticated}}>
+        <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors}}>
             {children}
         </AuthContext.Provider>
     )
