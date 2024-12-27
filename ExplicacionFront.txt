@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=NmkY4JgS21A
-3:06:06 / 
+3:11:12
 
 PARTE DEL FRONT EXPLICACION 
 C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client
@@ -85,7 +85,7 @@ export default {
  PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm run dev
 
 
-
+s
 
  5.
    extensiones de reactjs o dependencias
