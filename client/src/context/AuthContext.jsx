@@ -57,6 +57,7 @@ export const AuthhProvider = ({children})=>{
         try {
             // llame al metodo registrar
             const res = await registrerRequest(user);
+
             // printer el valor registrado
             // el data es de axios que lo q devuelve le registro del back
             console.log(res.data);
@@ -67,7 +68,6 @@ export const AuthhProvider = ({children})=>{
             setIsAuthenticated(true);
             // todo ok
         } catch (error) {
-
             // muestra todo el error
             console.log(error);
 
@@ -96,24 +96,29 @@ export const AuthhProvider = ({children})=>{
         try {
             // metood registrar
             const res = await loginrequest(user);
-
+            
             // printer consola
             console.log(res);
+            
+            // metodo de autenticado
+            setIsAuthenticated(true);
+            
         // error    
         } catch (error) {
 
             // error.response.data : si error es un array 
-            // recordar que del back el zod te envia como array
+            // recordar que del back el zodete envia como array
             if(Array.isArray(error.response.data)){
-                setErrors(error.response.data);
+              return  setErrors(error.response.data);
             }
 
             // printer consola
             // console.error(error);
-            console.log(error.response.data);
+            // console.log(error.response.data);
 
              // controlando los errores con usestate
-            setErrors(error.response.data);
+            //  pero lo convierte en un array
+            setErrors([error.response.data.message]);
         }
     }
 

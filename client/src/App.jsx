@@ -1,47 +1,60 @@
-
-import {BrowserRouter, Route, Routes} from 'react-router';
-import LoginPage from './pages/LoginPage';
-import RegistrerPage from './pages/RegistrerPage';
-import { AuthhProvider } from './context/AuthContext';
-
+import { BrowserRouter, Route, Routes } from "react-router";
+import LoginPage from "./pages/LoginPage";
+import RegistrerPage from "./pages/RegistrerPage";
+import { AuthhProvider } from "./context/AuthContext";
+import TaskPage from "./pages/TaskPage";
+import TaskFormPage from "./pages/TaskFormPage";
+import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/HomePage";
+import ProtectdRoutes from "./ProtectdRoutes";
 
 // COMPONENTE PADRE
-
 const App = () => {
-
   // renderizado del componente
   return (
-
     // AuthhProvider : todos los componentes dentro del AuthhProvider podra tener acceso eso y sus valores : client\src\context\AuthContext.jsx
     <AuthhProvider>
+      {/* administrando los routes */}
+      <BrowserRouter>
+        <Routes>
+          {/* ROUTER PARA MOSTRAR COMPONENTES */}
 
-     {/* administrando los routes */}
-          <BrowserRouter>
-      <Routes>
+          {/* x default */}
+          {/* http://localhost:5173 */}
+          <Route path="/" element={<HomePage></HomePage>}></Route>
 
-{/* ROUTER PARA MOSTRAR COMPONENTES */}
+          {/* ESTAS 2 RUTAS DEBEN SER PUBLICAS  */}
+          {/* http://localhost:5173/login*/}
+          <Route path="/login" element={<LoginPage></LoginPage>}></Route>
+          {/* http://localhost:5173/registrer */}
+          <Route
+            path="/registrer"
+            element={<RegistrerPage></RegistrerPage>}
+          ></Route>
 
-
-    {/* x default */}
-    {/* http://localhost:5173 */}
-        <Route path='/' element={<h1>Home Page</h1>}></Route>
-        
-        {/* http://localhost:5173/login*/}
-        <Route path='/login' element={<LoginPage></LoginPage>}></Route>
-        
-        {/* http://localhost:5173/registrer */}
-        <Route path='/registrer' element={<RegistrerPage></RegistrerPage>}></Route>
-
-
-        <Route path='/tasks' element={<h1>Task Page</h1>}></Route>
-        <Route path='/add-task' element={<h1>new task</h1>}></Route>
-        <Route path='/tasks/:id' element={<h1>update task</h1>}></Route>
-        <Route path='/profile' element={<h1>profile</h1>}></Route>
-      </Routes>
-    </BrowserRouter>
-
+          {/* element={<ProtectdRoutes/> : sera el elemento padre ademas engloba a todos
+    tendra acceso al contexto*/}
+          <Route element={<ProtectdRoutes/>}>
+            {/* Todas esta rutas para usuarios logueados */}
+            {/* http://localhost:5173/tasks */}
+            <Route path="/tasks" element={<TaskPage></TaskPage>}></Route>
+            {/* http://localhost:5173/add-task */}
+            <Route
+              path="/add-task"
+              element={<TaskFormPage></TaskFormPage>}
+            ></Route>
+            {/* http://localhost:5173/tasks/2 */}
+            <Route
+              path="/tasks/:id"
+              element={<TaskFormPage></TaskFormPage>}
+            ></Route>
+            {/* http://localhost:5173/profile */}
+            <Route path="/profile" element={<ProfilePage />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </AuthhProvider>
   );
-}
+};
 
 export default App;

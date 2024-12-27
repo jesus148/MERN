@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=NmkY4JgS21A
-2:58:59 
+3:06:06 / 
 
 PARTE DEL FRONT EXPLICACION 
 C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client
@@ -107,6 +107,8 @@ basicamentes es para usar fetch pero de una mejor manera
 PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm install axios
 
 
+> para las coockies
+PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN> npm i js-cookie 
 
 6. 
    dentro de src folder o file q no veas debe crearse 
