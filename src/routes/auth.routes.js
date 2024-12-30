@@ -6,10 +6,12 @@
 import { Router } from "express";
 
 // importamos esto para los metodos y no hacer largo el codigo de aca 
-import { login , register , logout , profile} from '../controller/auth.controller.js'
+import { login , register , logout , profile, verifyToken} from '../controller/auth.controller.js'
 import { authRequired } from "../middlewares/ValidateToken.js";
 import {validateScheme} from '../middlewares/validator.middleware.js';
 import {registrerScheme, loginScheme} from '../schemas/auth.scheme.js';
+
+
 
 // ROUTER PARA USUARIO
 
@@ -45,6 +47,10 @@ router.post("/logout", logout);
 
 
 
+// verificando si el usuario existe
+// esta peticion se ejcutara cada vez que la pagina carge por primera vez
+// http://localhost:3000/api/verify
+router.get("/verify", verifyToken);
 
 
 // http://localhost:3000/api/profile   ---post

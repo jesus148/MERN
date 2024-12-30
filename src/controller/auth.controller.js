@@ -14,7 +14,7 @@ import { token } from 'morgan';
 
 
 import {createAccessToken} from '../libs/jwt.js';
-
+import {TOKEN_SECRET} from '../config.js'
 
 
 
@@ -158,9 +158,33 @@ export const login = async (req, res) => {
           // reponde el token al cliente 
           // https://jwt.io/ : pagina para ver tus tokens 
           // res.json({token});
-    
           // enviado como coockie > postman > abajo > a lado de body > sale coockie
+          // sameSite:'none' : que la coockie no esta en el mismo dominio 
+//           sameSite: 'none'
+// ¿Qué hace?
+// Controla cómo se comparte la cookie entre diferentes sitios web (cross-site).
+
+// 'none': Permite que la cookie se envíe en solicitudes cruzadas (cross-site).
+// 'lax': Solo permite enviar cookies en ciertas circunstancias, como enlaces o redirecciones.
+// 'strict': Solo envía cookies dentro del mismo sitio.
+// ¿Por qué usar 'none'?
+
+// Es común para aplicaciones que usan APIs desde dominios diferentes (por ejemplo, tu frontend y backend están en servidores distintos).
+// Al usar 'none', debes asegurarte de configurar también la opción secure (obligatoria para 'none' si estás en HTTPS).
+// secure: true
+// Asegura que la cookie solo se envíe a través de conexiones HTTPS.
+// Obligatorio si usas sameSite: 'none'.
+          // res.cookie('token', token, {
+          //   sameSite:'none',
+          //   secure:true, 
+          //   httpOnly : true
+          // });
+
+          // lo pega la coockie ya sea en el postaman o navegador donde ejecutes este metodo
+          // esto es el token 
+          // {token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N…jI0fQ.TKRUqLleX5p0x3IOiGNb3yKYpV1ZhVMJ1tF6Hr95dYQ'}
           res.cookie('token', token);
+
           // respuesta al cliente
           // res.json({
           //   message:"mensaje guardado satisfactoriamente"
@@ -230,6 +254,7 @@ export const login = async (req, res) => {
     export const profile = (req , res)=>{
     
       // encontrar por el id el usuario 
+      // desde el midlware se captura el request agregado o q captura el token 
       const userFound = User.findById(req.user.id);
 
       // si no lo encuentra 
@@ -252,5 +277,45 @@ export const login = async (req, res) => {
       // retorna el valor
       // res.sendStatus(200);
       // res.send('profile');
+
+    }
+
+
+
+
+
+    // verificando si el usuario existe
+    // esta peticion se ejcutara cada vez que la pagina carge por primera vez
+    export const verifyToken = async(req, res)=>{
+      // desenvolsando u obteniendo las coockies
+      const  {token}= req.cookies;
+      
+      // si no existe las coockiess
+      if(!token) return res.status(401).json({message: "unauthorized"});
+
+      // verificando el token  con su firma
+      jwt.verify(token, TOKEN_SECRET, async (err , user) => {
+        // si todo esta bien en el verify el user vendria  hacer esto 
+          // { id: '67673b9fcebdbd49b1e3a8a3', iat: 1734825067, exp: 1734911467 }
+
+        // si hary error
+        if(err) return res.status(401).json({message :"unauthorized"})
+    
+          // busca por el id 
+        const userfound = await User.findById(user.id);
+        // si no existe el usuario
+        if(!userfound) return res.status(401).json({
+          message : "unauthorized"
+        })
+
+        // retornado al cliente
+        return res.json({
+          id : userfound._id,
+          username : userfound.username,
+          email: userfound.email
+        });
+    
+        })
+
 
     }

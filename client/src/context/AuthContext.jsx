@@ -1,6 +1,7 @@
 
 import {createContext, useState , useContext, useEffect} from 'react';
-import { loginrequest, registrerRequest } from '../api/auth';
+import { loginrequest, registrerRequest, verifyTokenRequest } from '../api/auth';
+import Cookies from "js-cookie";
 
 
 // createContext : createContext te permite crear un contexto que los componentes pueden proporcionar o leer. pareciod al use context
@@ -32,6 +33,7 @@ export const useAuth = () =>{
 // AuthhProvider este valor se usa en el app el que engloba
 // {children} : serian los componentes hijos q estan dentro de aqui verlo en el App.jsx
 export const AuthhProvider = ({children})=>{
+
 
 
     // PARA REGISTRAR
@@ -90,6 +92,9 @@ export const AuthhProvider = ({children})=>{
 
 
     
+
+
+    // METODO LOGUEARSE
     // metodo para loguearse
     const signin = async (user) =>{
         // ok
@@ -130,6 +135,7 @@ export const AuthhProvider = ({children})=>{
     // para los efectos 
     // [errors] : solo mapeaa eso
     // recordar q si dejas un setTimeout suelto consume recursos cada vez q cambie el errors 
+    // recordar q los effect se ejecutan el 2 parametro que este mapeando
     useEffect(()=>{
         // si el errors tiene errores
         if(errors.length > 0){
@@ -143,6 +149,49 @@ export const AuthhProvider = ({children})=>{
         }
     }, [errors]);
 
+
+
+
+
+    // metodo obteniendo la coockie al momento de loguearse
+    // [] : se ejecuta solo 1 vez cualquier cambio en toda tu aplicacion. Significa que el efecto solo se ejecutará una vez, después del primer renderizado del componente. tengo o no el token 
+    // recordar esto se usar despues de loguearse
+    useEffect(()=>{
+
+        async function checkLogin(){
+            // obteniendo las coockies
+            const coockies = Cookies.get();
+    
+            // printer consola
+            // console.log(coockies);
+            
+            // verificar si existes las coockies
+            if(coockies.token){
+                try {
+                    //de las coockies le envia el token la variable que tiene el valor
+                    //recordar q este metodo verifyTokenRequest no tiene parametro osea si quieres le envias el coockies.token
+                    // pq en el axios.js withCredentials:true con esto envia el token auto al hacer las peticiones
+                    const res =await verifyTokenRequest(coockies.token);
+                    console.log(res);
+    
+                    // si la data no existe 
+                    if(!res.data) setIsAuthenticated(false);
+    
+                    // si hay data
+                    isAuthenticated(true);
+                    // almacena la data
+                    setUser(res.data);
+                } catch (error) {
+                    setIsAuthenticated(false);
+                    setUser(null);
+                }
+            }
+
+        }
+
+        // ejecuta funcion 
+        checkLogin()
+    }, [])
 
 
 

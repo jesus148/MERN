@@ -101,7 +101,7 @@ const RegistrerPage = () => {
            </form>
            <p className='flex gap-x-2 justify-between'>
 {/* Link to="/registrer" : redirecciona a otro componente recordar importar su module */}
-    Don have an account ? <Link to="/login" className='text-sky-500'>Sign Up</Link>
+    Don have an account ? <Link to="/login" className='text-sky-500'>sign un</Link>
 </p>
             </div>
         </div>

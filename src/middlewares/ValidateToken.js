@@ -44,7 +44,7 @@ export const authRequired =(req , res , next)=>{
         
         //printer 
         // le agrega al request el user si todo esta ok
-        // le agrega el el request que fue agregado en el midleware
+        // le agrega en el request que fue agregado en el midleware
         // osea agregamos al request 
         // en este caso se almacena el id 
             // { id: '67673b9fcebdbd49b1e3a8a3', iat: 1734825067, exp: 1734911467 }
