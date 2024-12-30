@@ -291,7 +291,7 @@ export const login = async (req, res) => {
       const  {token}= req.cookies;
       
       // si no existe las coockiess
-      if(!token) return res.status(401).json({message: "unauthorized"});
+      if(!token) return res.status(401).json({message: "unauthorized never"});
 
       // verificando el token  con su firma
       jwt.verify(token, TOKEN_SECRET, async (err , user) => {
@@ -299,7 +299,7 @@ export const login = async (req, res) => {
           // { id: '67673b9fcebdbd49b1e3a8a3', iat: 1734825067, exp: 1734911467 }
 
         // si hary error
-        if(err) return res.status(401).json({message :"unauthorized"})
+        if(err) return res.status(401).json({message :"unauthorized token"})
     
           // busca por el id 
         const userfound = await User.findById(user.id);
@@ -308,7 +308,7 @@ export const login = async (req, res) => {
           message : "unauthorized"
         })
 
-        // retornado al cliente
+        // retornado al cliente el usuario que ha sido logeado
         return res.json({
           id : userfound._id,
           username : userfound.username,

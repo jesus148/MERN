@@ -36,6 +36,7 @@ const App = () => {
     tendra acceso al contexto*/}
           <Route element={<ProtectdRoutes/>}>
             {/* Todas esta rutas para usuarios logueados */}
+            
             {/* http://localhost:5173/tasks */}
             <Route path="/tasks" element={<TaskPage></TaskPage>}></Route>
             {/* http://localhost:5173/add-task */}

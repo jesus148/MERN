@@ -38,11 +38,14 @@ export const AuthhProvider = ({children})=>{
 
     // PARA REGISTRAR
     // logica
+
+
     // user : almacena
     // setUser : modifica ese user
     // useState(null) : valor inicial en null
     // verificar en el devtols de react los valores de este estado context
     // luego de renderizar el return se ejecuta el return 
+    // osea aca se almacenma el usuario logeado
     const [user , setUser] = useState(null);
 
     // para verificar la autenticacion
@@ -52,6 +55,10 @@ export const AuthhProvider = ({children})=>{
     // guardar los errores del back
     // valor inicial un array vacio
     const [errors , setErrors] =useState([]);
+
+    // verificar el contexto , osea este loading es basicmente para check 
+    // si esta logueado 
+    const [loading , setLoading] = useState(true);
 
     // metodo para registrar
     const signUp = async(user) =>{
@@ -132,6 +139,7 @@ export const AuthhProvider = ({children})=>{
 
 
 
+    // EFECTOS PARA LOS ERRORES
     // para los efectos 
     // [errors] : solo mapeaa eso
     // recordar q si dejas un setTimeout suelto consume recursos cada vez q cambie el errors 
@@ -153,11 +161,12 @@ export const AuthhProvider = ({children})=>{
 
 
 
+
+    // EFECTOS PARA LOS COOCKIES 
     // metodo obteniendo la coockie al momento de loguearse
     // [] : se ejecuta solo 1 vez cualquier cambio en toda tu aplicacion. Significa que el efecto solo se ejecutará una vez, después del primer renderizado del componente. tengo o no el token 
     // recordar esto se usar despues de loguearse
     useEffect(()=>{
-
         async function checkLogin(){
             // obteniendo las coockies
             const coockies = Cookies.get();
@@ -165,27 +174,47 @@ export const AuthhProvider = ({children})=>{
             // printer consola
             // console.log(coockies);
             
-            // verificar si existes las coockies
-            if(coockies.token){
+            // verificar si no existes las coockies
+            if(!coockies.token){
+                setIsAuthenticated(false);
+                setLoading(false);
+                return setUser(null);
+            }
+
+            // todo ok
                 try {
                     //de las coockies le envia el token la variable que tiene el valor
                     //recordar q este metodo verifyTokenRequest no tiene parametro osea si quieres le envias el coockies.token
                     // pq en el axios.js withCredentials:true con esto envia el token auto al hacer las peticiones
                     const res =await verifyTokenRequest(coockies.token);
-                    console.log(res);
+                    // console.log(res);
     
+
                     // si la data no existe 
-                    if(!res.data) setIsAuthenticated(false);
-    
+                    if(!res.data){
+                        setIsAuthenticated(false);
+                        setLoading(false);
+                        return;
+                    }
+
+                    // todo ok frente a las coockies 
+
+                    setLoading(false);
                     // si hay data
-                    isAuthenticated(true);
-                    // almacena la data
+                    setIsAuthenticated(true);
+                    // almacena la data del usuario logeado
                     setUser(res.data);
+
+                // si hay errores
                 } catch (error) {
                     setIsAuthenticated(false);
                     setUser(null);
+                    setLoading(false);
+                    
+                    // printer error 
+                    // console.log(error);
                 }
-            }
+            
 
         }
 
@@ -196,12 +225,15 @@ export const AuthhProvider = ({children})=>{
 
 
 
+
+
+
     // renderizado componente
     // primero se carga tu return 
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar
     // al signUp y al const [user , setUser] osea exportamos estos 2 { signUp , user} , lo compartimos como 1 obejto por eso las 2 llaves
     return (
-        <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors , signin }}>
+        <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors , signin , loading}}>
             {children}
         </AuthContext.Provider>
     )
