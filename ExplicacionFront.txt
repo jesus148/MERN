@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=NmkY4JgS21A
-3:36:47   
+3:47:27    
 
 s
 PARTE DEL FRONT EXPLICACION 
@@ -86,7 +86,7 @@ export default {
  PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm run dev
 
 
-s
+
 
  5.
    extensiones de reactjs o dependencias
@@ -111,6 +111,9 @@ PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN\client> npm install
 > para las coockies , perimite leer las coockies desde el frontend
 PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN> npm i js-cookie 
 
-6. 
+6.  
+  ESTRUCTURA FRONT 
+  C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react\client\src 
+  
    dentro de src folder o file q no veas debe crearse 
     

@@ -4,6 +4,10 @@ import { loginrequest, registrerRequest, verifyTokenRequest } from '../api/auth'
 import Cookies from "js-cookie";
 
 
+
+// CONTEXTO PARA LOS COMPONENTE HIJOS SU LOGIN Y REGISTRAR CON SUS PARTES PARA AUTENTICAR
+
+
 // createContext : createContext te permite crear un contexto que los componentes pueden proporcionar o leer. pareciod al use context
 export const AuthContext = createContext();
 
@@ -11,19 +15,20 @@ export const AuthContext = createContext();
 
 
 // ESTO PARA IMPORTAR EN COMPONENTES HIJOS
-
 // esto sera el uso del contexto
 // sirve para dejar de importar el AuthContext y el useContext y solo importar el useAuth
 export const useAuth = () =>{
     // useContext lee nuestro contexto el AuthContext
+    // useContext es un Hook de React que te permite leer y suscribirte a un contexto desde tu componente.
     const context = useContext(AuthContext);
 
     // vamos a validadr si existe o no
     if(!context){
         throw new Error("useAuth must be used within an authprovider")
     }
-    // retornando el AuthContext que me devuelve el AuthContext.Provider y sus values
-    return context
+    // retornando el AuthContext que me devuel    return contextve el AuthContext.Provider y sus values
+    return context;
+
 }
 
 
@@ -36,10 +41,10 @@ export const AuthhProvider = ({children})=>{
 
 
 
+    // LOGICA DEL COMPONENTE 
+    
+    
     // PARA REGISTRAR
-    // logica
-
-
     // user : almacena
     // setUser : modifica ese user
     // useState(null) : valor inicial en null
@@ -232,6 +237,7 @@ export const AuthhProvider = ({children})=>{
     // primero se carga tu return 
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar
     // al signUp y al const [user , setUser] osea exportamos estos 2 { signUp , user} , lo compartimos como 1 obejto por eso las 2 llaves
+    // osea exportas todo lo q este dentro del value={{}} para q los componnetes hijos lo usen 
     return (
         <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors , signin , loading}}>
             {children}

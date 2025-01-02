@@ -7,13 +7,18 @@ import TaskFormPage from "./pages/TaskFormPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import ProtectdRoutes from "./ProtectdRoutes";
+import { TaskProvider } from "./context/TaskContext";
 
 // COMPONENTE PADRE
+// MOSTRARA LAS RUTAS
+
 const App = () => {
   // renderizado del componente
   return (
     // AuthhProvider : todos los componentes dentro del AuthhProvider podra tener acceso eso y sus valores : client\src\context\AuthContext.jsx
     <AuthhProvider>
+          {/* // TaskProvider : todos los componentes dentro del TaskProvider podra tener acceso eso y sus valores : client\src\context\TaskContext.jsx */}
+      <TaskProvider>
       {/* administrando los routes */}
       <BrowserRouter>
         <Routes>
@@ -54,6 +59,7 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
+      </TaskProvider>
     </AuthhProvider>
   );
 };

@@ -1,6 +1,10 @@
 import { useAuth } from "./context/AuthContext";
 import { Navigate , Outlet } from "react-router";
 
+
+// PROTECCION DE RUTAS 
+// este protege todas las rutas q estan dentro del <Route element={<ProtectdRoutes/>}>
+// solo entraras si estas logeado
 // este componente perimitiura decidir que componentes existen en nuestro routes
 // y si existen permitir que continuen
 

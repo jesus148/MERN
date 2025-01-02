@@ -5,6 +5,8 @@ import {useNavigate} from 'react-router';
 import { Link } from "react-router";
 
 // REGISTRO PARA USUARIO
+
+
 const RegistrerPage = () => {
 
     // parte logica componente
@@ -19,20 +21,21 @@ const RegistrerPage = () => {
     // llamamando e importando al contexto sus valores son bidireccionales
     // errors : RegistrerErrors  : el erros se almacena en el RegistrerErrors
     const {signUp , user , isAuthenticated , errors : registrerErrors  } = useAuth();
-
-    // redirecciona los ruoter
-    const navigate = useNavigate();
-
     // printer usuario del usecontext debe haber registrado primero
     // console.log(user);
 
 
+    // redirecciona los ruoter
+    const navigate = useNavigate();
+
+
+
     // el use effect
     // [isAuthenticated] : solo mapeara eso
-    useEffect(()=>{
-        // isAuthenticated cuando registrar lo redirige aqui
-        if(isAuthenticated) navigate("/tasks");
-    }, [isAuthenticated])
+    // useEffect(()=>{
+    //     // isAuthenticated cuando registrar lo redirige aqui
+    //     if(isAuthenticated) navigate("/tasks");
+    // }, [isAuthenticated])
 
 
 

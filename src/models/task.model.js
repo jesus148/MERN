@@ -16,7 +16,7 @@ const taskSchema  = new mongoose.Schema({
         default:Date.now //x deafult fecha de hoy
     },
     user:{
-        // el id de ese modelo
+        // el id de ese modelo del user
         type:mongoose.Schema.Types.ObjectId,
         ref:'User' ,//referencia al modelo User
         required:true  // sera requerido
