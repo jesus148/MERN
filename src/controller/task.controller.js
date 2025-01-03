@@ -12,7 +12,7 @@ export const getTasks=async(req , res) =>{
     // enuentra todo solo de ese usuario 
     // sus tareas
     const tasks = await Task.find({
-        // del request del midleware traes todo el use con el 
+        // del request del midleware traes todo el user con el 
         // populate('user');
         user:req.user.id
     }).populate('user');

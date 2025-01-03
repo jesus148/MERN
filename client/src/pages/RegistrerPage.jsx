@@ -25,6 +25,8 @@ const RegistrerPage = () => {
     // console.log(user);
 
 
+    
+
     // redirecciona los ruoter
     const navigate = useNavigate();
 
@@ -32,10 +34,10 @@ const RegistrerPage = () => {
 
     // el use effect
     // [isAuthenticated] : solo mapeara eso
-    // useEffect(()=>{
-    //     // isAuthenticated cuando registrar lo redirige aqui
-    //     if(isAuthenticated) navigate("/tasks");
-    // }, [isAuthenticated])
+    useEffect(()=>{
+        // isAuthenticated cuando registrar lo redirige aqui
+        if(isAuthenticated) navigate("/tasks");
+    }, [isAuthenticated])
 
 
 

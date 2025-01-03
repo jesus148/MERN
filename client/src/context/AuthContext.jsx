@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 // CONTEXTO PARA LOS COMPONENTE HIJOS SU LOGIN Y REGISTRAR CON SUS PARTES PARA AUTENTICAR
 
 
+
 // createContext : createContext te permite crear un contexto que los componentes pueden proporcionar o leer. pareciod al use context
 export const AuthContext = createContext();
 
@@ -65,6 +66,9 @@ export const AuthhProvider = ({children})=>{
     // si esta logueado 
     const [loading , setLoading] = useState(true);
 
+
+
+    
     // metodo para registrar
     const signUp = async(user) =>{
         // error
@@ -144,6 +148,23 @@ export const AuthhProvider = ({children})=>{
 
 
 
+    // METODO SALIL DE LA SESION ELIMINAR COOCKIE
+    const logout = ()=>{
+        // eliminando las coockies
+        Cookies.remove("token");
+        // cmabia a falso
+        setIsAuthenticated(false);
+        // borra el usuario
+        setUser(null);
+    }
+
+
+
+
+
+
+
+
     // EFECTOS PARA LOS ERRORES
     // para los efectos 
     // [errors] : solo mapeaa eso
@@ -168,6 +189,7 @@ export const AuthhProvider = ({children})=>{
 
 
     // EFECTOS PARA LOS COOCKIES 
+    // osea esto se ejecuta cuando entra a este componente
     // metodo obteniendo la coockie al momento de loguearse
     // [] : se ejecuta solo 1 vez cualquier cambio en toda tu aplicacion. Significa que el efecto solo se ejecutará una vez, después del primer renderizado del componente. tengo o no el token 
     // recordar esto se usar despues de loguearse
@@ -239,7 +261,7 @@ export const AuthhProvider = ({children})=>{
     // al signUp y al const [user , setUser] osea exportamos estos 2 { signUp , user} , lo compartimos como 1 obejto por eso las 2 llaves
     // osea exportas todo lo q este dentro del value={{}} para q los componnetes hijos lo usen 
     return (
-        <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors , signin , loading}}>
+        <AuthContext.Provider value={{ signUp , user , isAuthenticated , errors , signin , loading , logout }}>
             {children}
         </AuthContext.Provider>
     )

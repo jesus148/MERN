@@ -65,3 +65,20 @@ router.get("/profile", authRequired , profile);
 // se exporta pa usar en el app.js 
 // una parte de express q no ha sido añadida
 export default router ;
+
+
+
+
+
+
+
+
+
+
+// registro de segundo usuario
+// http://localhost:3000/api/register   ---post
+// {
+//     "email":"test12@test.com",
+//     "password":"test12",
+//     "username":"test12com"
+// }

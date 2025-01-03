@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import ProtectdRoutes from "./ProtectdRoutes";
 import { TaskProvider } from "./context/TaskContext";
+import Navbar from './components/Navbar';
 
 // COMPONENTE PADRE
 // MOSTRARA LAS RUTAS
@@ -21,6 +22,8 @@ const App = () => {
       <TaskProvider>
       {/* administrando los routes */}
       <BrowserRouter>
+      {/* componente de barra de navegacion  */}
+      <Navbar />
         <Routes>
           {/* ROUTER PARA MOSTRAR COMPONENTES */}
 

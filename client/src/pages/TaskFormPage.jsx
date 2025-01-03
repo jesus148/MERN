@@ -37,7 +37,9 @@ const TaskFormPage = () => {
     // parte del renderizado
     // primero se carga
     return (
-        <div className='bg-zinc-800 max-w-md w-full p-10 rounded-md'>
+        <div className=' h-[calc(100vh-100px)]  flex items-center justify-center'>
+            <div className='bg-zinc-800 max-w-md w-full p-10 rounded-md'>
+
             <form onSubmit={onSubmit}>
             {/* ...register("title") : igual a tu clase modelo en el back */}
                 <input type="text" placeholder='Title' {...register("title")} autoFocus className='w-full bg-zinc-700 text-white px-4 
@@ -48,6 +50,7 @@ const TaskFormPage = () => {
                     Save
                 </button>
             </form>
+            </div>
         </div>
     );
 }

@@ -38,17 +38,26 @@ export const useTask = ()=>{
 // {children} : serian los componentes hijos q estan dentro de aqui verlo en el App.jsx
 export function TaskProvider({children}){
 
-        // LOGICA DEL COMPONENTE 
-    const [tasks , setTasks]= useState([]);
+    // LOGICA DEL COMPONENTE 
+    const [tasks, setTasks] = useState([]);
 
 
 
     // GET ALL TASKS
-    const getTasks = async () =>{
-        // registra
+    const getTasks = async ()=>{
+
+        // obtiene todo
         const res = await getTasksRequest();
-        console.log(res)
-        // return res;
+
+        // printer 
+        // console.log(res)
+        
+        // toda la data del back es bastante , pero las tareas solo estan de todo eso q devuelve el back solo en el data
+        // y como es un array lo pone en el tasks , ver en la consola
+        setTasks(res.data);
+        
+        // printer
+        // console.log(tasks)
     }
 
 
@@ -62,7 +71,7 @@ export function TaskProvider({children}){
 
 
 
-                // renderizado componente
+    // renderizado componente
     // primero se carga tu return 
     return(
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar

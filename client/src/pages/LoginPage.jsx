@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { data } from 'react-router';
+import { data, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import { Link } from "react-router";
 
@@ -20,14 +20,24 @@ const LoginPage = () => {
     // importando el contexto 
     // signin : para ingresar 
     // errors : SigninErrors  para ver los errores se almacena en el SigninErrors
-    const {signin , errors : SigninErrors }= useAuth();
+    const {signin , errors : SigninErrors , isAuthenticated }= useAuth();
 
+    // para navegar entre componentes
+    const navigate = useNavigate();
     
     // data : le envia los valores de los atributoss osea los valores del form
    // handleSubmit : valida las entradas antes de invocar el onsubmit
     const onSubmit = handleSubmit((data)=>{
         signin(data);
     });
+
+
+    // cuando tu entres a este componente este effecto se activa 
+    // mapea el  [isAuthenticated] del contexto
+    useEffect(()=>{
+        // lo redirige
+        if(isAuthenticated) navigate("/tasks")
+    }, [isAuthenticated])
 
 
     // renderizado del componente

@@ -7,6 +7,10 @@ import { token } from "morgan";
 import jwt from 'jsonwebtoken';
 import {TOKEN_SECRET} from '../config.js';
 
+
+// PARA VERIFICAR EL TOKEN 
+// una vez logueado , y despues de quiera hacer una peticion esto se envia por defecto 
+
 export const authRequired =(req , res , next)=>{
 
 

@@ -15,10 +15,12 @@ const router =Router();
 
 
 // http://localhost:3000/api/tasks  ---get
+// authRequired : midleware nesecitas loguearte
 router.get('/tasks', authRequired , getTasks);
 
 
 // http://localhost:3000/api/tasks/67675b06743b70039500345d ---get
+// authRequired : midleware nesecitas loguearte
 router.get('/tasks/:id', authRequired , getTask);
 
 
@@ -32,6 +34,7 @@ router.post('/tasks', authRequired , validateScheme(createTaskScheme),createTask
 
 
 // http://localhost:3000/api/tasks/67675b06743b70039500345d ---delete
+// authRequired : midleware nesecitas loguearte
 router.delete('/tasks/:id', authRequired , deleteTask);
 
 
@@ -41,6 +44,7 @@ router.delete('/tasks/:id', authRequired , deleteTask);
 //     "title":"libro2",
 //     "description":"libro2"
 // }
+// authRequired : midleware nesecitas loguearte
 router.put('/tasks/:id', authRequired , updateTask);
 
 
