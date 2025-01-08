@@ -17,4 +17,5 @@ export const loginrequest = (user) => axios.post(`/login`, user);
 
 
 // verificar el token 
+// http://localhost:3000/api
 export const verifyTokenRequest = ()=> axios.get('/verify')

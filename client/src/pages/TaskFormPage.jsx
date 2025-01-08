@@ -1,5 +1,6 @@
 import {useForm} from 'react-hook-form';
-import {useTask} from '../context/TaskContext'
+import {useTask} from '../context/TaskContext';
+import { useNavigate } from 'react-router';
 
 
 
@@ -25,12 +26,19 @@ const TaskFormPage = () => {
     const {register , handleSubmit} = useForm();
 
 
+    // para navegar 
+    const navigate = useNavigate();
+
+
     
     // data : le envia los valores de los atributoss osea los valores del form
    // handleSubmit : valida las entradas antes de invocar el onsubmit , recibe los datos del formulario si las validaciones son exitosas
     const onSubmit = handleSubmit ((data)=>{
         // registra metodo del contexto
         createTask(data);
+
+        // redirige
+        navigate('/tasks');
     });
     
 

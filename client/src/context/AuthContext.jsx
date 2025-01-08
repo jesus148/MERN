@@ -5,6 +5,9 @@ import Cookies from "js-cookie";
 
 
 
+
+
+
 // CONTEXTO PARA LOS COMPONENTE HIJOS SU LOGIN Y REGISTRAR CON SUS PARTES PARA AUTENTICAR
 
 
@@ -68,6 +71,7 @@ export const AuthhProvider = ({children})=>{
 
 
 
+
     
     // metodo para registrar
     const signUp = async(user) =>{
@@ -118,8 +122,11 @@ export const AuthhProvider = ({children})=>{
             // metood registrar
             const res = await loginrequest(user);
             
+            // seteando la data con datos del usuario
+            setUser(res.data);
+
             // printer consola
-            console.log(res);
+            // console.log(res);
             
             // metodo de autenticado
             setIsAuthenticated(true);
@@ -150,12 +157,18 @@ export const AuthhProvider = ({children})=>{
 
     // METODO SALIL DE LA SESION ELIMINAR COOCKIE
     const logout = ()=>{
+
+
         // eliminando las coockies
         Cookies.remove("token");
+        
+        // usuario resetea
+        setUser(null);
+
         // cmabia a falso
         setIsAuthenticated(false);
-        // borra el usuario
-        setUser(null);
+
+
     }
 
 
@@ -191,10 +204,10 @@ export const AuthhProvider = ({children})=>{
     // EFECTOS PARA LOS COOCKIES 
     // osea esto se ejecuta cuando entra a este componente
     // metodo obteniendo la coockie al momento de loguearse
-    // [] : se ejecuta solo 1 vez cualquier cambio en toda tu aplicacion. Significa que el efecto solo se ejecutará una vez, después del primer renderizado del componente. tengo o no el token 
+    // [] : se ejecuta solo 1 vez cualquier cambio en toda tu aplicacion. Significa que el efecto solo se ejecutará una vez, después del primer renderizado del componente. tengo o no el token , osea mapea cualquier cambio de los componenes hijos q esten dentro del uthContext.Provider
     // recordar esto se usar despues de loguearse
     useEffect(()=>{
-        async function checkLogin(){
+        const checkLogin = async() =>{ 
             // obteniendo las coockies
             const coockies = Cookies.get();
     
@@ -205,7 +218,7 @@ export const AuthhProvider = ({children})=>{
             if(!coockies.token){
                 setIsAuthenticated(false);
                 setLoading(false);
-                return setUser(null);
+                return ;
             }
 
             // todo ok
@@ -218,14 +231,9 @@ export const AuthhProvider = ({children})=>{
     
 
                     // si la data no existe 
-                    if(!res.data){
-                        setIsAuthenticated(false);
-                        setLoading(false);
-                        return;
-                    }
+                    if (!res.data) return setIsAuthenticated(false);
 
                     // todo ok frente a las coockies 
-
                     setLoading(false);
                     // si hay data
                     setIsAuthenticated(true);
@@ -235,7 +243,7 @@ export const AuthhProvider = ({children})=>{
                 // si hay errores
                 } catch (error) {
                     setIsAuthenticated(false);
-                    setUser(null);
+
                     setLoading(false);
                     
                     // printer error 

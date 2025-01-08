@@ -11,7 +11,7 @@ import { Navigate , Outlet } from "react-router";
 const ProtectdRoutes = () => {
 
   // parte logica
-  const { loading ,user, isAuthenticated} = useAuth();
+  const { loading , isAuthenticated} = useAuth();
 
   // printer 
   // console.log({ loading , isAuthenticated});
@@ -21,7 +21,7 @@ const ProtectdRoutes = () => {
 
   // si el usuario no esta autenticado y tampoco tiene el loading 
   // lo redirige si es false se queda ahi 
-  if ( !loading &&!isAuthenticated) return <Navigate to="/login" replace />;
+  if ( !loading && !isAuthenticated) return <Navigate to="/login" replace />;
 
   // parte del renderizado
 //   continua con el componente q esta adentro

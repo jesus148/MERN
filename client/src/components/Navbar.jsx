@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from '../context/AuthContext';
 
 // COMPONENTE BARRA DE NAVEGACION 
@@ -9,9 +8,19 @@ export default function Navbar() {
     // parte logica 
     // segundo se muestra
 
-    const {isAuthenticated , logout}= useAuth();
+    // importando el contexto
+    const {isAuthenticated , logout , user}= useAuth();
     
+    // console.log(user);
 
+
+    const navigate = useNavigate();
+
+
+    const handleLogout = () => {
+        logout();
+        navigate('/'); // Redirige al usuario después de cerrar sesión
+    };
 
 
 
@@ -19,8 +28,8 @@ export default function Navbar() {
     // primero se muestra 
   return (
     <nav className='bg-zinc-700  flex justify-between py-4 px-10 '>
-         {/* to='/' : redirige a esa ruta  */}
-        <Link to='/'>
+         {/* to='/' : redirige a esa ruta  depende si esta autenticado*/}
+        <Link to={isAuthenticated ? "/tasks" :"/" }>
            <h1 className='text-2xl font-bold'>Task</h1>
         </Link>
         <ul className='flex gap-x-10'>
@@ -32,7 +41,8 @@ export default function Navbar() {
                 isAuthenticated ? (
                     <>
                     <li>
-                        Bienvenido Usuario
+                        {/* desenvolsando  = a la clase guia o al api */}
+                        Bienvenido {user.username}
                     </li>
                     {/* redirige a esa ruta */}
                     <li>
@@ -40,16 +50,16 @@ export default function Navbar() {
                     </li>
                     <li>
                         {/* redige a la ruta to='/'  y ejecuta el onClick*/}
-                        <Link to='/' onClick={()=> {
-                            logout()
-                        }}>Salir</Link>
+                        <Link to="/" onClick={handleLogout}>
+                         Salir
+                       </Link>
                     </li>
                     </>
                 ):(
                     // no esta autenticado
                     <>
                     {/* redirige al login  */}
-            <li><Link to='/login'>Login</Link></li>
+            <li><Link to='/login' >Login</Link></li>
              {/* to='registrer' : redirige a esa ruta  */}
             <li><Link to='/registrer'>Registrer</Link></li>
                     </>

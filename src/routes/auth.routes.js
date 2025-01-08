@@ -79,6 +79,6 @@ export default router ;
 // http://localhost:3000/api/register   ---post
 // {
 //     "email":"test12@test.com",
-//     "password":"test12",
-//     "username":"test12com"
+//     "username":"test12",
+//     "password":"test12com"
 // }
