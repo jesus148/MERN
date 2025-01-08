@@ -20,7 +20,9 @@ const LoginPage = () => {
     // importando el contexto 
     // signin : para ingresar 
     // errors : SigninErrors  para ver los errores se almacena en el SigninErrors
-    const {signin , errors : SigninErrors , isAuthenticated }= useAuth();
+    const {signin , errors : SigninErrors , isAuthenticated , loading}= useAuth();
+
+
 
     // para navegar entre componentes
     const navigate = useNavigate();

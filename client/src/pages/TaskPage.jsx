@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
 import {useTask} from '../context/TaskContext'
+import TaskCard from '../components/TaskCard';
 // COMPONENTE LSITA LAS TAREAS
 
 const TaskPage = () => {
@@ -29,12 +30,18 @@ const TaskPage = () => {
         <div>
             {/* con el map hace un for al task q tiene toda la data */}
             {tasks.map(( task )=> ( 
-                // key={task._id} : cada tarea tien su id que sera su key
-                <div key={task._id}>
-                    {/* desenvolsando = a los atributos del modelo del back  */}
-                    <h1>{task.title}</h1>
-                    <p>{task.description}</p>
-                </div>
+                // // key={task._id} : cada tarea tien su id que sera su key
+                // <div key={task._id}>
+                //     {/* desenvolsando = a los atributos del modelo del back  */}
+                //     <h1>{task.title}</h1>
+                //     <p>{task.description}</p>
+                // </div>
+
+
+                // usando un componente 
+                // task={task} : toda la data se guarda en el prop variable task=  
+                // key={task._id} : de toda la data el _id de task de mongo se guarda en key=
+                <TaskCard task={task}  key={task._id}/>
             ))}
         </div>
     );
