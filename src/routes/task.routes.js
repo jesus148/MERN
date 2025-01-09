@@ -39,7 +39,7 @@ router.delete('/tasks/:id', authRequired , deleteTask);
 
 
 
-// http://localhost:3000/api/tasks/676768bfcde7e05130707a54  --- post
+// http://localhost:3000/api/tasks/676768bfcde7e05130707a54  --- put
 // {
 //     "title":"libro2",
 //     "description":"libro2"

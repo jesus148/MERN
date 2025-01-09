@@ -1,18 +1,20 @@
 import {useForm} from 'react-hook-form';
 import {useTask} from '../context/TaskContext';
-import { useNavigate } from 'react-router';
+import { useNavigate , useParams} from 'react-router';
+import { useEffect } from 'react';
 
 
 
 // REGISTRANDO TAREA
 
 const TaskFormPage = () => {
+
     // logica del componente
     //  segundo se carga
 
 
     // importando el contexto
-    const {tasks , createTask} = useTask();
+    const {tasks , createTask , getTask} = useTask();
     // printer values del contexto
     // console.log(tasks);
     // console.log(createTask());
@@ -28,6 +30,23 @@ const TaskFormPage = () => {
 
     // para navegar 
     const navigate = useNavigate();
+
+    // para obtener los parametro a traves de la url , sobre todo al actualizar
+    const params = useParams();
+
+
+
+
+    // effecto
+    // solo se ejecuta en el 1 renderizado del return de aca, osea despues del render
+    useEffect( ()=>{
+        // si existe un parametro en la url al entrar en este componente
+        // http://localhost:5173/tasks/2  : esta es la ruta y este es su route path="/tasks/:id" , verificar el id deber ser =
+        if(params.id){
+            getTask( params.id)
+        }
+    }, [])
+
 
 
     

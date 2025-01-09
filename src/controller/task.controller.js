@@ -2,6 +2,11 @@
 import Task from '../models/task.model.js';
 
 // CONTROLLER PARA TASK
+// ojo Recordar : cuando hagas un backen ponlo dentro de un trycatch pa q cuando el front u otro haga una peticion errada a tu back 
+// no se caiga , osea siga corriendo tu back
+
+
+
 
 // obtiene todo
 // pero solo las tareas de 1 usuario
@@ -9,6 +14,9 @@ import Task from '../models/task.model.js';
 // El método poblar() en Mongoose se utiliza para reemplazar automáticamente un campo en un documento con los datos reales de un documento relacionado.
 // Por ejemplo, si tiene dos colecciones, como Usuarios y Publicaciones, donde cada publicación almacena una ID de usuario para hacer referencia a su autor, puede usar populate() para reemplazar esa ID de usuario en la colección Publicaciones con la información completa del usuario de la colección Usuarios. . Esto facilita el acceso a datos relacionados sin tener que consultar manualmente cada colección..
 export const getTasks=async(req , res) =>{
+
+    // todo ok
+    try {
     // enuentra todo solo de ese usuario 
     // sus tareas
     const tasks = await Task.find({
@@ -18,13 +26,20 @@ export const getTasks=async(req , res) =>{
     }).populate('user');
     // responde al cliente
     res.json(tasks);
+    // si hay error
+    } catch (error) {
+        res.status(404).json({message : 'not found task'})
+    }
+
 }
 
 
 
 // creacion de una tarea
 export const createTask=async(req , res) =>{
-    // obtiene del request
+    // todo ok
+    try {
+            // obtiene del request
     const {title, description , date} = req.body;
 
     // printer el request agregado del midleware
@@ -44,23 +59,37 @@ export const createTask=async(req , res) =>{
 
     // devuelve al cliente
     res.json(savedTaked);
+
+    // si hay error
+    } catch (error) {
+        res.status(404).json({message:'no cannot registrer task'})
+    }
+
 }
 
 
 
 
-export const getTask=async(req , res) =>{
 
-    // encuentra por id
+// obteniendo una tarea
+export const getTask=async(req , res) =>{
+    // todo ok
+    try {
+            // encuentra por id
     // req.params.id : el id = en el routes 
     // populate('user'): me trae todo de ese usuario  apartir de su id
     const task = await Task.findById(req.params.id).populate('user');
 
     // si no existe
-    if(!task) return res.status(404).json;
+    if(!task) return res.status(404).json({message:"Task not found"});
 
     // si existe lo devuelve al front , la tarea encontrada
     res.json(task);
+
+    // si hay error
+    } catch (error) {
+        return res.status(404).json({message:"Task not found"})
+    }
 }
 
 
@@ -68,17 +97,25 @@ export const getTask=async(req , res) =>{
 
 
 
-
+// eliminando una tarea
 export const deleteTask=async(req , res) =>{
-     // encuentra por id
+    // todo ok
+    try {
+    // encuentra por id
     // req.params.id : el id = en el routes 
     const task = await Task.findByIdAndDelete(req.params.id);
 
     // si no existe
     if(!task) return res.status(404).json({ message: "Task not found" });;
 
-    // si existe lo devuelve al front la tarea eliminada
+    // si existe lo devuelve al front el codigo 204, q es todo ok pero tiene cuerpo de return la peticion
     res.sendStatus(204);   
+
+    // si hay error
+    } catch (error) {
+        res.status(404).json({message : 'no cant delete one task' })
+    }
+
 }
 
 
@@ -86,7 +123,10 @@ export const deleteTask=async(req , res) =>{
 
 
 
+// actualizando una tarea
 export const updateTask=async(req , res) =>{
+
+    try {
     // encuentra por id y acutaliza con el req.body
     // {new : true} : te devuelve el objeto nuevo actualizado
     const task = await Task.findByIdAndUpdate(req.params.id , req.body, {
@@ -100,4 +140,8 @@ export const updateTask=async(req , res) =>{
 
     // si hay retorna la task
     res.json(task)
+    } catch (error) {
+        res.status(404).json({message:'no cannot update task'})
+    }
+
 }

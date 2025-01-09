@@ -27,7 +27,7 @@ const TaskPage = () => {
     // parte del renderizado
     // primero se muestra 
     return (
-        <div>
+        <div className='grid grid-cols-3 gap-2'>
             {/* con el map hace un for al task q tiene toda la data */}
             {tasks.map(( task )=> ( 
                 // // key={task._id} : cada tarea tien su id que sera su key

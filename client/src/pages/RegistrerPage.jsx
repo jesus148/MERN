@@ -10,6 +10,7 @@ import { Link } from "react-router";
 const RegistrerPage = () => {
 
     // parte logica componente
+    // se carga despues del return 
 
 
     // register : para registrar
@@ -62,6 +63,7 @@ const RegistrerPage = () => {
 
 
     // parte del renderizado
+    // primero se carga esto
     // onSubmit : cuando realizar un evento con un btn
     return (
         <div className='h-[calc(100vh-100px)]  flex items-center justify-center'>

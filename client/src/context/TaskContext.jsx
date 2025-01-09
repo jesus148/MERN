@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from 'react';
-import {createTaskRequest, getTasksRequest} from '../api/tasks'
+import {createTaskRequest, getTasksRequest , deleteTaskRequest, getTaskRequest} from '../api/tasks'
 
 
 // CONTEXTO PARA MANTENIMEINTO CRUD A SUS COMPONENTES HIJOS 
@@ -39,6 +39,7 @@ export const useTask = ()=>{
 export function TaskProvider({children}){
 
     // LOGICA DEL COMPONENTE 
+    // luego se carga esto despues del return
     const [tasks, setTasks] = useState([]);
 
 
@@ -54,6 +55,7 @@ export function TaskProvider({children}){
         
         // toda la data del back es bastante , pero las tareas solo estan de todo eso q devuelve el back solo en el data
         // y como es un array lo pone en el tasks , ver en la consola
+        // recordar q el axios devuelve todo 1 objeto y solo obtenemos la data donde estan los datos
         setTasks(res.data);
         
         // printer
@@ -65,9 +67,52 @@ export function TaskProvider({children}){
     const createTask = async(tasks) =>{
         // registra
         const res = await createTaskRequest(tasks);
-        // printer
+
+
+        // printer todo devuelve el api
+        // console.log(res);
+    }
+
+
+
+
+    // eliminar tarea 
+    const deleteTask = async(id)=>{
+        try {
+            // metodo eliminar
+            const res= await deleteTaskRequest(id);
+
+            // usando el filter a nivel de front para actualizar listado
+            // si el codidgo es 204
+            // setTasks : pa setear el tasks
+            // tasks.filter : del listado de tasks q esta en tasks el usestate a nivel de front filtraremos
+            // task._id !== id : solo pasaran o se agregaran al tasks , los tasks q sean diferentes al task eliminado(q es el id)
+            if(res.status === 204) setTasks(tasks.filter( (task)=> task._id !== id ))
+
+            // printer 
+            console.log(res);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+
+
+    // obtener una tarea
+    const getTask = async (id) =>{
+        // ejecutando el metodo
+        const res= await getTaskRequest(id);
+        
+        // printer toda lo q devuelve axios , de ahi obtner solo la data
         console.log(res);
     }
+
+
+
+
 
 
 
@@ -76,7 +121,7 @@ export function TaskProvider({children}){
     return(
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar
     // osea exportas todo lo q este dentro del value={{}} para q los componnetes hijos lo usen
-        <TaskContext.Provider value={{tasks , setTasks , createTask , getTasks}}>
+        <TaskContext.Provider value={{tasks , setTasks , createTask , getTasks , deleteTask , getTask}}>
             {children}
         </TaskContext.Provider>
     )

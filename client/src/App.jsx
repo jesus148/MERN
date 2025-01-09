@@ -23,6 +23,8 @@ const App = () => {
       {/* administrando los routes */}
       <BrowserRouter>
       {/* componente de barra de navegacion  */}
+      {/* container : centra pero nesecita el mx-auto */}
+      <main className="container mx-auto px-10 ">
       <Navbar />
         <Routes>
           {/* ROUTER PARA MOSTRAR COMPONENTES */}
@@ -61,6 +63,7 @@ const App = () => {
             <Route path="/profile" element={<ProfilePage />}></Route>
           </Route>
         </Routes>
+      </main>
       </BrowserRouter>
       </TaskProvider>
     </AuthhProvider>
