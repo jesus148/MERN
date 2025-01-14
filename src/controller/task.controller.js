@@ -57,7 +57,7 @@ export const createTask=async(req , res) =>{
     // lo guarda
     const savedTaked = await newTask.save();
 
-    // devuelve al cliente
+    // devuelve al cliente el objeto agregado
     res.json(savedTaked);
 
     // si hay error
@@ -75,7 +75,7 @@ export const createTask=async(req , res) =>{
 export const getTask=async(req , res) =>{
     // todo ok
     try {
-            // encuentra por id
+    // encuentra por id
     // req.params.id : el id = en el routes 
     // populate('user'): me trae todo de ese usuario  apartir de su id
     const task = await Task.findById(req.params.id).populate('user');

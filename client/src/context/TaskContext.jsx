@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from 'react';
-import {createTaskRequest, getTasksRequest , deleteTaskRequest, getTaskRequest} from '../api/tasks'
+import {createTaskRequest, getTasksRequest , deleteTaskRequest, getTaskRequest, updateTaskRequest} from '../api/tasks'
 
 
 // CONTEXTO PARA MANTENIMEINTO CRUD A SUS COMPONENTES HIJOS 
@@ -46,31 +46,45 @@ export function TaskProvider({children}){
 
     // GET ALL TASKS
     const getTasks = async ()=>{
+        // todo ok 
+        try {
+            const res = await getTasksRequest();
 
-        // obtiene todo
-        const res = await getTasksRequest();
+            // printer 
+            // console.log(res)
+            
+            // toda la data del back es bastante , pero las tareas solo estan de todo eso q devuelve el back solo en el data
+            // y como es un array lo pone en el tasks , ver en la consola
+            // recordar q el axios devuelve todo 1 objeto y solo obtenemos la data donde estan los datos
+            setTasks(res.data);
+            
+            // printer
+            // console.log(tasks)
 
-        // printer 
-        // console.log(res)
-        
-        // toda la data del back es bastante , pero las tareas solo estan de todo eso q devuelve el back solo en el data
-        // y como es un array lo pone en el tasks , ver en la consola
-        // recordar q el axios devuelve todo 1 objeto y solo obtenemos la data donde estan los datos
-        setTasks(res.data);
-        
-        // printer
-        // console.log(tasks)
+        // si hay error    
+        } catch (error) {
+         console.error(error);      
+        }
     }
+
+
+
+
 
 
     // REGISTRAR TAREA
     const createTask = async(tasks) =>{
-        // registra
-        const res = await createTaskRequest(tasks);
+        // todo ok
+        try {
+            // registra
+            const res = await createTaskRequest(tasks);
 
-
-        // printer todo devuelve el api
-        // console.log(res);
+            // printer todo devuelve el api
+            // console.log(res);
+        // error    
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 
@@ -103,13 +117,37 @@ export function TaskProvider({children}){
 
     // obtener una tarea
     const getTask = async (id) =>{
+        // todo ok
+        try {
         // ejecutando el metodo
         const res= await getTaskRequest(id);
         
         // printer toda lo q devuelve axios , de ahi obtner solo la data
-        console.log(res);
+        // console.log(res);
+
+        // de todo el axios solo obtenemos el .data donde esta la data
+        return res.data;
+
+        // si hay error
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
+
+
+
+    // UPDATE ONE TASK
+    const updateTask = async (id, task)=>{
+        // todo ok
+        try {   
+            await updateTaskRequest(id,task);
+        // si hay error    
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 
 
@@ -121,7 +159,7 @@ export function TaskProvider({children}){
     return(
     // todo los componentes q esten dentro de AuthContext.Provider podran llamar o usar
     // osea exportas todo lo q este dentro del value={{}} para q los componnetes hijos lo usen
-        <TaskContext.Provider value={{tasks , setTasks , createTask , getTasks , deleteTask , getTask}}>
+        <TaskContext.Provider value={{tasks , setTasks , createTask , getTasks , deleteTask , getTask, updateTask}}>
             {children}
         </TaskContext.Provider>
     )

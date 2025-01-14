@@ -30,7 +30,7 @@ export default function Navbar() {
     <nav className='bg-zinc-700  flex justify-between py-4 px-10 '>
          {/* to='/' : redirige a esa ruta  depende si esta autenticado*/}
         <Link to={isAuthenticated ? "/tasks" :"/" }>
-           <h1 className='text-2xl font-bold'>Task</h1>
+           <h1 className='text-2xl font-bold'>Tareas</h1>
         </Link>
         <ul className='flex gap-x-10'>
             {/* link : Una mejora progresiva <a href> contenedor para permitir la navegación con enrutamiento del lado del cliente.

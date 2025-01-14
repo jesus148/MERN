@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 
 // COMPONENTE PADRE
 // MOSTRARA LAS RUTAS
+// ESTA ES LA ESTRUCTURA TOTAL DEL PROYECTO
 
 const App = () => {
   // renderizado del componente
