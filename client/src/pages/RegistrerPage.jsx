@@ -4,7 +4,7 @@ import {useAuth} from '../context/AuthContext';
 import {useNavigate} from 'react-router';
 import { Link } from "react-router";
 
-// REGISTRO PARA USUARIO
+// COMPONENTE REGISTRO PARA USUARIO
 
 
 const RegistrerPage = () => {
@@ -80,7 +80,7 @@ const RegistrerPage = () => {
                 ))
             }
             <div className='bg-zinc-800 max-w-md w-full p-12 rounded-md'>
-            <h1 className='text-2xl font-bold'>Registrer</h1>
+            <h1 className='text-2xl font-bold'>Registro</h1>
            <form onSubmit={onSubmit}>
 
            {/* "username" : name del input */}
@@ -104,9 +104,9 @@ const RegistrerPage = () => {
              {errors.password && (<p className='text-red-600'>password is required</p>)}
 
 
-            <button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Registrer</button>
+            <button type='submit' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2'>Registrar</button>
            </form>
-           <p className='flex gap-x-2 justify-between'>
+           <p className='flex gap-x-2 justify-between my-2'>
 {/* Link to="/registrer" : redirecciona a otro componente recordar importar su module */}
     Don have an account ? <Link to="/login" className='text-sky-500'>sign un</Link>
 </p>

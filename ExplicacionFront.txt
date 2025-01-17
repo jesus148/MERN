@@ -1,5 +1,5 @@
 https://www.youtube.com/watch?v=NmkY4JgS21A
-4:34:50  
+4:34:40  
 
 
 PARTE DEL FRONT EXPLICACION 
@@ -115,7 +115,7 @@ PS C:\Users\JesúsArgelHuamanAnge\Desktop\Marco\reactjs\MERN> npm i js-cookie
 
 > 
  day.js : para manejar los distintos formatos de fechas 
- https://day.js.org/docs/en/installation/node-js---documentacion 
+ https://day.js.org/docs/en/installation/node-js ---documentacion 
   PS C:\Users\jesus\Desktop\JESUS\REACT JS\PORTAFOLIO\mern_crud_react\client> npm install dayjs
 
 6.  

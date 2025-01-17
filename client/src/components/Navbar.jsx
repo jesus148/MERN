@@ -61,7 +61,7 @@ export default function Navbar() {
                     {/* redirige al login  */}
             <li><Link to='/login' >Login</Link></li>
              {/* to='registrer' : redirige a esa ruta  */}
-            <li><Link to='/registrer'>Registrer</Link></li>
+            <li><Link to='/registrer'>Registro</Link></li>
                     </>
                 )
              }

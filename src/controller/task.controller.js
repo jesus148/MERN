@@ -42,13 +42,19 @@ export const createTask=async(req , res) =>{
             // obtiene del request
     const {title, description , date} = req.body;
 
+    console.log(req.body);
+
+    
     // printer el request agregado del midleware
     // { id: '67673b9fcebdbd49b1e3a8a3', iat: 1734825067, exp: 1734911467 }
-    console.log(req.user);
+    // console.log(req.user);
+
+
     // creacion  de un task
     const newTask =new Task({
         title,
         description,
+        // el date lo convierte a date , ose desde el front viene en string
         date , 
         // req.user.id : obtiene el id agregado desde el midleware
         user : req.user.id

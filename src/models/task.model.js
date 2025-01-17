@@ -12,6 +12,7 @@ const taskSchema  = new mongoose.Schema({
         required:true
     },
     date:{
+        // recordar que el date en js es fecha y hora
         type:Date, //tipo de dato
         default:Date.now //x deafult fecha de hoy
     },

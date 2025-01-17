@@ -5,6 +5,10 @@ import { useAuth } from '../context/AuthContext';
 import { Link } from "react-router";
 
 
+
+
+// COMPONENTE PARA LOGUEARSE
+
 const LoginPage = () => {
 
     // logica del componente

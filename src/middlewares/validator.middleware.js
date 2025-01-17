@@ -6,7 +6,7 @@ export const validateScheme = (schema) => (req , res , next) =>{
 
         // un esquema para la valiacion 
         // el req.body es el requestt de la peticion
-        // y el schema src\schemas\auth.scheme.js
+        // y el schema src\schemas\task.chema.js
         schema.parse(req.body);
         next();
 

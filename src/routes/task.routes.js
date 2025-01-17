@@ -30,6 +30,7 @@ router.get('/tasks/:id', authRequired , getTask);
 //     "description":"libro1"
 // }  
 // validateScheme(createTaskScheme) : midleware para verificar lo q registraras
+// authRequired : midleware nesecitas loguearte
 router.post('/tasks', authRequired , validateScheme(createTaskScheme),createTask);
 
 
