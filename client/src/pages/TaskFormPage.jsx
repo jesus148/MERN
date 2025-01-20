@@ -62,48 +62,90 @@ const TaskFormPage = () => {
         // console.log(data.date); //2025-01-02 es la fecha sin formatea del form
 
 
+
+        // REGISTRANDO PERO DEBE ENVIARSE EL CAMPO DATE 
+        // todo ok
+        // try {
+
+        // // const dataValid={
+        // //     ...data
+        // // }    
+        // // if(data.date) dataValid.date = dayjs.utc(data.date).format();
+        
+        //     // si hay un params en la url
+        // if(params.id){
+        //     // actualizando
+        //     updateTask(params.id, {
+        //         // traes todo el objeto el data(la data del form) , es como descomponenerlo
+        //         ...data,
+
+
+        //         // y le agregas esto , si ya existe solo actualiza y si no existe lo crea
+        //         // el date: es donde se agregara igual a tu atributo en tu clase guia
+
+        //         // dayjs.utc(data.date) : convierte la fecha (data.date) en un formato UTC 
+        //         // UTC es un estándar global para manejar fechas sin preocuparse por las zonas horarias. Esto es útil para evitar problemas cuando los usuarios están en diferentes regiones del mundo.
+        //         // ejemplo :si data.date es "2025-01-16T12:00:00"  tu zona horaria es UTC-5, la fecha se convertirá en "2025-01-16T17:00:00Z" en formato UTC.
+        //         // y el format(): format() devuelve la fecha como una cadena de texto, usando un formato específico.
+        //         // Si no le pasas un argumento al método, devuelve la fecha en un formato estándar como:
+        //         // "YYYY-MM-DDTHH:mm:ssZ".
+        //         // recordar q desde el front la fecha mayormente va en string
+
+        //         date: dayjs.utc(data.date).format(),
+        //     });
+        // // si hay error    
+        // }else{
+        //     // registra metodo del contexto
+        //     createTask({
+        //         ...data,
+        //         date: dayjs.utc(data.date).format(),
+        //     });
+        // }
+        // // error
+        // } catch (error) {
+        //     console.error(error);
+        // }
+        // redirige
+        // navigate('/tasks');
+
+
+
+
+
+        // REGISTRANDO PERO EL CAMPO DATE SERA OPCIONAL AL REGISTRAR
         // todo ok
         try {
 
-        // const dataValid={
-        //     ...data
-        // }    
-        // if(data.date) dataValid.date = dayjs.utc(data.date).format();
-        
-            // si hay un params en la url
-        if(params.id){
-            // actualizando
-            updateTask(params.id, {
-                // traes todo el objeto el data(la data del form) , es como descomponenerlo
+            // creando un objeto con toda la data a registrar
+            const datavalid={
+                // trae la data
                 ...data,
-                // y le agregas esto , si ya existe solo actualiza y si no existe lo crea
-                // el date: es donde se agregara igual a tu atributo en tu clase guia
+                // y le agrega el campo date o lo actualiza
+                // data.date ?  : si hay data formate la data osea esto dayjs.utc(data.date).format() , osea el data.date le agrega o formateara usando el dayjs y formateara a fecha global con el utl y dara un formato con el format() ebn string con un formato para la bd
+                // dayjs.utc().format() : y si data.date no tiene valor se utiliza la fecha actual (dayjs.utc() genera el momento actual en UTC y el .format() convierte la fecha actual al formato ISO 8601 osea lo convierte a string con un formato
+                date: data.date ? dayjs.utc(data.date).format() : dayjs.utc().format(),
+            }
+    
+            // printer
+            console.log(datavalid);
+    
+            // actualizar
+            // params.id : el id de la url
+            if(params.id){
 
-                // dayjs.utc(data.date) : convierte la fecha (data.date) en un formato UTC 
-                // UTC es un estándar global para manejar fechas sin preocuparse por las zonas horarias. Esto es útil para evitar problemas cuando los usuarios están en diferentes regiones del mundo.
-                // ejemplo :si data.date es "2025-01-16T12:00:00"  tu zona horaria es UTC-5, la fecha se convertirá en "2025-01-16T17:00:00Z" en formato UTC.
-                // y el format(): format() devuelve la fecha como una cadena de texto, usando un formato específico.
-                // Si no le pasas un argumento al método, devuelve la fecha en un formato estándar como:
-                // "YYYY-MM-DDTHH:mm:ssZ".
-                // recordar q desde el front la fecha mayormente va en string
-
-                date: dayjs.utc(data.date).format(),
-            });
-        // si hay error    
-        }else{
-            // registra metodo del contexto
-            createTask({
-                ...data,
-                date: dayjs.utc(data.date).format(),
-            });
-        }
-        // error
+                updateTask(params.id ,datavalid);
+            
+            // registrar
+            }else{
+                createTask(datavalid);
+            }
+        // si hay un error    
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
 
-        // redirige
-        // navigate('/tasks');
+
+
     });
 
 
