@@ -35,6 +35,7 @@ const RegistrerPage = () => {
 
     // el use effect
     // [isAuthenticated] : solo mapeara eso
+    // cuando entras a este vista si esta autenticado redirige ahi
     useEffect(()=>{
         // isAuthenticated cuando registrar lo redirige aqui
         if(isAuthenticated) navigate("/tasks");
@@ -66,7 +67,7 @@ const RegistrerPage = () => {
     // primero se carga esto
     // onSubmit : cuando realizar un evento con un btn
     return (
-        <div className='h-[calc(100vh-100px)]  flex items-center justify-center'>
+        <div className='h-[calc(100vh-100px)] flex items-center justify-center'>
             
             {/* esto aparece si hay error */}
             {

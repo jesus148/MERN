@@ -55,6 +55,7 @@ export const createTask=async(req , res) =>{
         title,
         description,
         // el date lo convierte a date , ose desde el front viene en string
+        // si no hay lo crea x default con la fecha actual
         date , 
         // req.user.id : obtiene el id agregado desde el midleware
         user : req.user.id
@@ -81,7 +82,7 @@ export const createTask=async(req , res) =>{
 export const getTask=async(req , res) =>{
     // todo ok
     try {
-    // encuentra por id
+    // encuentra por id del task
     // req.params.id : el id = en el routes 
     // populate('user'): me trae todo de ese usuario  apartir de su id
     const task = await Task.findById(req.params.id).populate('user');
@@ -133,7 +134,7 @@ export const deleteTask=async(req , res) =>{
 export const updateTask=async(req , res) =>{
 
     try {
-    // encuentra por id y acutaliza con el req.body
+    // encuentra por id del task y acutaliza con el req.body
     // {new : true} : te devuelve el objeto nuevo actualizado
     const task = await Task.findByIdAndUpdate(req.params.id , req.body, {
         new : true

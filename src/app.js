@@ -18,11 +18,11 @@ const app = express();
 
 
     // para los nucleos
-//     Si está configurado en true, el backend permitirá que las solicitudes incluyan credenciales (como cookies, cabeceras de autenticación, etc.).
+//   credentials:true :  Si está configurado en true, el backend permitirá que las solicitudes incluyan credenciales (como cookies, cabeceras de autenticación, etc.).
 // Esto es útil si tu aplicación usa cookies para manejar sesiones o tokens de autenticación que se envían automáticamente con cada solicitud.
 // Nota: Cuando credentials está en true, debes asegurarte de que el navegador también esté configurado para enviar credenciales, mediante la opción withCredentials: true en el frontend (por ejemplo, en Axios).
     app.use(cors({ 
-        // puerto de tu front
+        // puerto de tu front , ose solo de este puerto
         origin:'http://localhost:5173',
         credentials:true
     }));

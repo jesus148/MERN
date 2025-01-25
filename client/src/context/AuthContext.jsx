@@ -135,7 +135,8 @@ export const AuthhProvider = ({children})=>{
         } catch (error) {
 
             // error.response.data : si error es un array 
-            // recordar que del back el zodete envia como array
+            // recordar que del back el zod envia como array
+            // estos errores son del zod validando el esquema
             if(Array.isArray(error.response.data)){
               return  setErrors(error.response.data);
             }
@@ -146,6 +147,8 @@ export const AuthhProvider = ({children})=>{
 
              // controlando los errores con usestate
             //  pero lo convierte en un array
+            // y estos erroes son del metodo del controller 
+            // x eso se convierten en un array
             setErrors([error.response.data.message]);
         }
     }
@@ -218,6 +221,7 @@ export const AuthhProvider = ({children})=>{
             if(!coockies.token){
                 setIsAuthenticated(false);
                 setLoading(false);
+                // console.log("first")
                 return ;
             }
 

@@ -100,7 +100,13 @@ const { email , password , username} =req.body;
 
     // si hay error
     }catch (error){
+//       El cuerpo del objeto error incluye al menos las propiedades básicas name, message y stack. Dependiendo de la fuente (como bibliotecas externas), puede tener propiedades adicionales como:
+// code: Código de error (por ejemplo, en Mongoose o bcryptjs).
+// keyValue: Valores duplicados (en Mongoose).
+// path: Campo relacionado con el error.
+      // un error general , solo queremos el message
       res.status(500).json({ message: error.message });
+      
     }
     
 
@@ -123,11 +129,10 @@ const { email , password , username} =req.body;
 // 2----METODO LOGUEARSE
 export const login = async (req, res) => {
   //    print consola el valor del request
-  
-  // obteniendo la data del cliente 
-  const { email , password } =req.body; 
-      
       try{
+
+          // obteniendo la data del cliente 
+         const { email , password } =req.body; 
 
         // busca al usuario
         const userFound =await User.findOne({email});
@@ -174,6 +179,8 @@ export const login = async (req, res) => {
 // secure: true
 // Asegura que la cookie solo se envíe a través de conexiones HTTPS.
 // Obligatorio si usas sameSite: 'none'.
+// httpOnly : Si es true, la cookie no estará accesible desde JavaScript en el navegador (es decir, no se puede acceder mediante document.cookie). y si es false La comparación será false, por lo que httpOnly no se habilita.
+// Ejemplo: Puedes acceder a la cookie desde el navegador usando document.cookie para pruebas.
           // res.cookie('token', token, {
           //   sameSite:'none',
           //   secure:true, 
@@ -227,7 +234,10 @@ export const login = async (req, res) => {
   export const logout = (req , res)=>{
     
     // resetea el coockie  osea elimina la coockie 
+    // res : modifica el res del cliente
     // tambien sirve en el postman 
+    // "token": nombre de tu token 
+    // "" : establece en cero el token
     res.cookie("token","",{
       expires:new Date(0)
     })
@@ -249,8 +259,7 @@ export const login = async (req, res) => {
 
 
 
-    // recordar si ya estas logueado o  h
-
+    // recordar si ya estas logueado o  no
     export const profile = (req , res)=>{
     
       // encontrar por el id el usuario 
@@ -286,6 +295,7 @@ export const login = async (req, res) => {
 
     // verificando si el usuario existe
     // esta peticion se ejcutara cada vez que la pagina carge por primera vez
+    // osea verifica el token q esta en la coockie
     export const verifyToken = async(req, res)=>{
       // desenvolsando u obteniendo las coockies
       const  {token}= req.cookies;

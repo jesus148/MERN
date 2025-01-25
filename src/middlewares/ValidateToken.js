@@ -12,9 +12,8 @@ import {TOKEN_SECRET} from '../config.js';
 // una vez logueado , y despues de quiera hacer una peticion esto se envia por defecto 
 
 export const authRequired =(req , res , next)=>{
-
-
-    // printer los headers y la cokie, usar asi cuando no uses paquetes de npm para las coockies
+    try {
+          // printer los headers y la cokie, usar asi cuando no uses paquetes de npm para las coockies
     // si ya estas logueado y tienes un toquen aca esto funcionara tanto en el cliente front 
     // tambien en el postman 
     // const token = req.headers.cookie;
@@ -63,4 +62,10 @@ export const authRequired =(req , res , next)=>{
 
     // todo ok  sigue su camino
     // next()
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+  
 }

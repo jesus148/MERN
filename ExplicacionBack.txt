@@ -41,7 +41,10 @@ EXTENSIONES
    para las validaciones
    documentacion : https://zod.dev/
 
+
+
 ----------ESTRUCTURA BACKEND-------------
+dentro del src > folder o file que no veas debe crearse 
 - crear carpeta src
 - crear folder > src
      controller : funciones q se ejecutan cuando visiten una url

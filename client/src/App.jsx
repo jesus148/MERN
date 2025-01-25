@@ -17,15 +17,16 @@ import Navbar from './components/Navbar';
 const App = () => {
   // renderizado del componente
   return (
-    // AuthhProvider : todos los componentes dentro del AuthhProvider podra tener acceso eso y sus valores : client\src\context\AuthContext.jsx
+
+    // AuthhProvider : todos los componentes dentro del AuthhProvider podra tener acceso eso y sus valores : client\src\context\AuthContext.jsx  es el contexto para la gestion de usuarios
     <AuthhProvider>
-          {/* // TaskProvider : todos los componentes dentro del TaskProvider podra tener acceso eso y sus valores : client\src\context\TaskContext.jsx */}
+          {/* // TaskProvider : todos los componentes dentro del TaskProvider podra tener acceso eso y sus valores : client\src\context\TaskContext.jsx es el contexto para mantenimiento de las tareas */}
       <TaskProvider>
       {/* administrando los routes */}
       <BrowserRouter>
-      {/* componente de barra de navegacion  */}
       {/* container : centra pero nesecita el mx-auto */}
       <main className="container mx-auto px-10 ">
+      {/* componente de barra de navegacion  fijo*/}
       <Navbar />
         <Routes>
           {/* ROUTER PARA MOSTRAR COMPONENTES */}
@@ -44,7 +45,7 @@ const App = () => {
           ></Route>
 
           {/* element={<ProtectdRoutes/> : sera el elemento padre ademas engloba a todos
-    tendra acceso al contexto*/}
+    tendra acceso al contexto , basicamente los protege*/}
           <Route element={<ProtectdRoutes/>}>
             {/* Todas esta rutas para usuarios logueados */}
             

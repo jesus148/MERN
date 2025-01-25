@@ -4,7 +4,7 @@ import {z} from 'zod';
 
 // VALIDACIONES PARA LAS TAREAS
 
-
+// los atributos deben ser iguales a la clase guia
 export const createTaskScheme = z.object({
 
     // title: debe ser string

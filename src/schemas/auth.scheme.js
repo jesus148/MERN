@@ -8,6 +8,7 @@ import {z} from 'zod';
 
 
 // valiaciones para registrar 
+// los atributos iguales a la clase guia
 export const registrerScheme = z.object({
 
     // el username de tipo string
@@ -43,6 +44,7 @@ export const registrerScheme = z.object({
 
 
 // validaciones de login 
+
 
 export const loginScheme = z.object({
 
